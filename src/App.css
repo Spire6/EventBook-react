@@ -1,0 +1,96 @@
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+div.img img {
+    height: 300px;
+    background: #aaa;
+  }
+
+h1 {
+	font-size: 57px;
+	padding-bottom: 10px;
+}
+
+li {
+	margin-right: 15px;
+}
+
+div.container {
+  max-width: 1200px;
+  margin-top:40px
+}
+
+div.item {
+	margin: 5px;
+	border: 1px solid #ccc;
+	width: 850px;
+	height: 270px;
+	padding: 10px;
+	text-align: left;
+	position: relative; 
+  box-shadow: 0px 0px 36px -12px rgba(0,0,0,0.75);
+  }
+ 
+div.dashDescr {
+  text-align: center;
+}
+
+ div.desc {
+  text-align: left;
+  width: 530px;
+  height: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  
+div.item:hover {
+  border: 1px solid #777;
+  }
+  
+div.item.eventImage {
+	float: left;
+}
+  
+div.item img {
+	height: 200px;
+	float: left;
+	padding-bottom: 10px;
+	padding-right: 10px;
+  }
+  
+div.detailsbtn {
+	padding-bottom: 10px;
+}
+  
+  
+  
+  div.bigbtn {
+  margin: 5px;
+  border: 1px solid #ccc;
+  width: auto;
+  height: 500px;
+  background-color: #17A2B8;
+  color: white;
+  border-radius: 5% / 5%;
+  overflow: hidden;
+  transition: all 0.5s ease-in;
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 30px;
+  box-shadow: -10px 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+div.bigbtn:hover {
+  border: 1px solid #777;
+  background-color: #147888;
+  box-shadow: 20px 50px 100px rgba(0, 0, 0, 0.5);
+}
+
+div.bigbtn-text {
+	font-size:60px;
+	text-align: center;
+	padding-top: 70px;
+}
+
