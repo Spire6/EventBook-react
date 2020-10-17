@@ -3,6 +3,10 @@
   text-decoration: inherit;
 }
 
+div.form-group textarea {
+  height: 8em;
+}
+
 div.img img {
     height: 300px;
     background: #aaa;
