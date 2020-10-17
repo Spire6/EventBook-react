@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import EventItem from './Event/EventItem';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getEvents } from "../actions/eventActions";
+import PropTypes from "prop-types";
 
 class BrowseEvents extends Component {
+
+
+    componentDidMount() {
+        this.props.getEvents();
+    }
+
     render() {
+
+        const { events } = this.props.event
+
         return (
             <div>
                 <div className="container">
@@ -29,10 +41,12 @@ class BrowseEvents extends Component {
 
                         <div className="col-sm-9">
 
-                            <EventItem />
-                            <EventItem />
-                            <EventItem />
-                            <EventItem />
+
+                            {
+                                events.map(event => (
+                                    <EventItem key={event.id} event={event} />
+                                ))
+                            }
 
 
                         </div>
@@ -45,4 +59,13 @@ class BrowseEvents extends Component {
 }
 
 
-export default BrowseEvents;
+BrowseEvents.propTypes = {
+    event: PropTypes.object.isRequired,
+    getEvents: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+    event: state.event,
+});
+
+export default connect(mapStateToProps, { getEvents })(BrowseEvents);

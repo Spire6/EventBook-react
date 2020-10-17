@@ -14,8 +14,8 @@ class AddEvent extends Component {
             name: "",
             location: "",
             description: "",
-            startDate: "2021-01-05T08:30",
-            endDate: "2021-01-12T08:30",
+            startDate: "",
+            endDate: "",
             errors: {}
         }
 
@@ -100,10 +100,11 @@ class AddEvent extends Component {
                                 <h6>Start Date</h6>
                                 <div className="form-group">
                                     <input type="datetime-local"
-                                        className="form-control form-control-lg"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.startDate })}
                                         name="startDate"
                                         value={this.state.startDate}
                                         onChange={this.onChangeVariable} />
+                                    <div className="invalid-feedback"> {errors.startDate} </div>
                                 </div>
 
                                 <h6>End Date</h6>
@@ -121,8 +122,6 @@ class AddEvent extends Component {
                     </div>
                 </div>
             </div>
-
-
 
         )
     }
