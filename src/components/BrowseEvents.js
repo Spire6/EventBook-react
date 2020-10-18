@@ -30,7 +30,7 @@ class BrowseEvents extends Component {
                                 <button type="submit" className="btn btn-info btn-lg btn-block">Search</button>
                             </form> <br /> <br /> <br />
 
-                            <Link className="strange" to="/createEvent">
+                            <Link to="/createEvent" style={{ textDecoration: 'none' }}>
                                 <button type="button" className="btn btn-success btn-lg btn-block">Create New Event</button>
                             </Link> <br />
                             <button type="button" className="btn btn-info btn-lg btn-block">All events <br />(55)<br /></button>

@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddEvent from './components/Event/AddEvent';
 import { Provider } from "react-redux";
 import store from './store';
+import EventItemDetails from './components/EventItemDetails';
+import UpdateEvent from './components/Event/UpdateEvent';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/createEvent" component={AddEvent} />
           <Route exact path="/browseEvents" component={BrowseEvents} />
+          <Route exact path="/eventDetails/:id" component={EventItemDetails} />
+          <Route exact path="/updateEvent/:id" component={UpdateEvent} />
         </div>
       </Router>
     </Provider>

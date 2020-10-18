@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import { getEvent, createEvent } from "../../actions/eventActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createEvent } from "../../actions/eventActions";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
+import moment from "moment";
 
-class AddEvent extends Component {
-
+class UpdateEvent extends Component {
 
     constructor() {
         super()
 
         this.state = {
+            id: "",
             name: "",
             location: "",
             description: "",
@@ -25,9 +27,34 @@ class AddEvent extends Component {
 
 
     componentWillReceiveProps(nextProps) {
+
         if (nextProps.errors) {
             this.setState({ errors: nextProps.errors });
         }
+
+        const {
+            id,
+            name,
+            location,
+            description,
+            startDate,
+            endDate
+        } = nextProps.event;
+
+        this.setState({
+            id,
+            name,
+            location,
+            description,
+            startDate,
+            endDate
+        });
+    }
+
+
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        this.props.getEvent(id, this.props.history);
     }
 
 
@@ -38,7 +65,8 @@ class AddEvent extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const newEvent = {
+        const updatedEvent = {
+            id: this.state.id,
             name: this.state.name,
             location: this.state.location,
             description: this.state.description,
@@ -46,13 +74,15 @@ class AddEvent extends Component {
             endDate: this.state.endDate
         }
 
-        this.props.createEvent(newEvent, this.props.history)
+        this.props.createEvent(updatedEvent, this.props.history)
     }
 
 
     render() {
 
         const { errors } = this.state
+        const startDate = moment(this.state.startDate).format("yyyy-MM-DDThh:mm")
+        const endDate = moment(this.state.endDate).format("yyyy-MM-DDThh:mm")
 
         return (
 
@@ -60,8 +90,10 @@ class AddEvent extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <h5 className="display-4 text-center">Create New Event</h5>
+                            <h5 className="display-4 text-center">Edit Event</h5>
+                            <h1 class="text-center"> {this.state.name} </h1>
                             <hr /><br />
+
                             <form onSubmit={this.onSubmitVariable}>
                                 <h6>Event name</h6>
                                 <div className="form-group">
@@ -71,7 +103,6 @@ class AddEvent extends Component {
                                         name="name"
                                         value={this.state.name}
                                         onChange={this.onChangeVariable} />
-
                                     {errors.name && (<div className="invalid-feedback"> {errors.name}</div>)}
                                     {errors.eventName && (<div className="invalid-feedback"> {errors.eventName}</div>)}
                                 </div>
@@ -104,7 +135,7 @@ class AddEvent extends Component {
                                     <input type="datetime-local"
                                         className={classnames("form-control form-control-lg", { "is-invalid": errors.startDate })}
                                         name="startDate"
-                                        value={this.state.startDate}
+                                        value={startDate}
                                         onChange={this.onChangeVariable} />
                                     <div className="invalid-feedback"> {errors.startDate} </div>
                                 </div>
@@ -112,14 +143,19 @@ class AddEvent extends Component {
                                 <h6>End Date</h6>
                                 <div className="form-group">
                                     <input type="datetime-local"
-                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.endDate })}
+                                        className="form-control form-control-lg"
                                         name="endDate"
-                                        value={this.state.endDate}
+                                        value={endDate}
                                         onChange={this.onChangeVariable} />
-                                    <div className="invalid-feedback"> {errors.endDate} </div>
                                 </div>
 
-                                <button type="submit" className="btn btn-info btn-block mt-4">Create</button>
+                                <button type="submit" className="btn btn-info btn-block mt-4">Save event</button>
+
+                                <Link to={`/eventDetails/${this.state.id}`} style={{ textDecoration: 'none' }}>
+                                    <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}
+                                </Link>
+                                <br /><br />
+
                             </form>
                         </div>
                     </div>
@@ -131,14 +167,16 @@ class AddEvent extends Component {
 }
 
 
-AddEvent.propTypes = {
+UpdateEvent.propTypes = {
+    getEvent: PropTypes.func.isRequired,
     createEvent: PropTypes.func.isRequired,
+    event: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
-}
-
+};
 
 const mapStateToProps = state => ({
+    event: state.event.event,
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { createEvent })(AddEvent);
+export default connect(mapStateToProps, { getEvent, createEvent })(UpdateEvent);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import eventImage from "../../Images/eventimage.jpg"
+import eventImage from "../../Images/eventimage.jpg";
+import { Link } from "react-router-dom";
 
 class EventItem extends Component {
     render() {
@@ -18,7 +19,6 @@ class EventItem extends Component {
             hour12: false,
             hour: "2-digit",
             minute: "2-digit"
-
         };
 
         return (
@@ -30,16 +30,19 @@ class EventItem extends Component {
                     </div>
                     <div className="desc">
                         <h3>{event.name}</h3>
-                        <b>Date:</b> {new Date(event.startDate).toLocaleDateString("en-US", dateOptions)} <br />
-                        <b>Time:</b> {new Date(event.startDate).toLocaleTimeString("en-US", timeOptions)} <br />
-                        <b>Location:</b> {event.location} <br /> <br />
-                        <b>Description:</b> <i> {event.description} </i> <br />
-
-
+                        <b> <i className="far fa-calendar-alt"> </i> Date: </b> {new Date(event.startDate).toLocaleDateString("en-US", dateOptions)} <br />
+                        <b> <i className="far fa-clock"></i> Time:</b> {new Date(event.startDate).toLocaleTimeString("en-US", timeOptions)} <br />
+                        <b> <i className="fas fa-thumbtack"></i> Location:</b> {event.location} <br />
+                        <b> <i className="fas fa-bullhorn"></i> Category:</b>  <br />
+                        <b> <i className="fas fa-info-circle"></i> Description:</b>  {event.description} <br />
                     </div>
-                    <div className="detailsbtn">
-                        <button type="button" className="btn btn-info btn-lg btn-block">Details</button>
-                    </div>
+
+                    <Link to={`/eventDetails/${event.id}`} style={{ textDecoration: 'none' }}>
+                        <div className="detailsbtn">
+                            <button type="button" className="btn btn-info btn-lg btn-block"> <i className="fas fa-angle-double-right"></i> Event details</button>
+                        </div>
+                    </Link>
+
                 </div>
 
             </div>

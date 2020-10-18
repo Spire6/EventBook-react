@@ -3,9 +3,9 @@ import logo from "../../Images/logo.png";
 import { Link } from "react-router-dom";
 
 class Header extends Component {
+
     render() {
         return (
-
             <React.Fragment>
                 <div>
                     <nav className="navbar navbar-expand-sm bg-info navbar-dark">
@@ -40,7 +40,7 @@ class Header extends Component {
 
                             </ul>
 
-                            <button className="btn btn btn-success my-2 my-sm-0" type="submit">Sign up/Log in</button>
+                            <button className="btn btn btn-success my-2 my-sm-0" type="submit"> Sign up/Log in</button>
 
                         </div>
 
