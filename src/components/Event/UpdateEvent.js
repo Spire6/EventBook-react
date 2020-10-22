@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import moment from "moment";
+//import moment from "moment-timezone";
 
 class UpdateEvent extends Component {
 
@@ -96,6 +97,7 @@ class UpdateEvent extends Component {
 
                             <form onSubmit={this.onSubmitVariable}>
                                 <h6>Event name</h6>
+                                {startDate}
                                 <div className="form-group">
                                     <input type="text"
                                         className={classnames("form-control form-control-lg", { "is-invalid": errors.name || errors.eventName })}

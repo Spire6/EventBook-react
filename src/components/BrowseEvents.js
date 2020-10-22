@@ -27,11 +27,15 @@ class BrowseEvents extends Component {
                                 <div className="form-group">
                                     <input type="text" className="form-control" placeholder="Quize night..." />
                                 </div>
-                                <button type="submit" className="btn btn-info btn-lg btn-block">Search</button>
+                                <button type="submit" className="btn btn-info btn-lg btn-block">
+                                    <i class="fas fa-search"></i> Search
+                                </button>
                             </form> <br /> <br /> <br />
 
                             <Link to="/createEvent" style={{ textDecoration: 'none' }}>
-                                <button type="button" className="btn btn-success btn-lg btn-block">Create New Event</button>
+                                <button type="button" className="btn btn-success btn-lg btn-block">
+                                    <i class="far fa-calendar-plus"></i> Create Event
+                                </button>
                             </Link> <br />
                             <button type="button" className="btn btn-info btn-lg btn-block">All events <br />(55)<br /></button>
                             <button type="button" className="btn btn-info btn-lg btn-block">Events in a month <br />(12)<br /></button>

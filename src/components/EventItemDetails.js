@@ -112,7 +112,7 @@ class EventItemDetails extends Component {
                             </div>
 
 
-                            <div className="details">
+                            <div className="longDetails">
                                 <h3> <i className="fas fa-calendar-alt"></i> Details</h3>
 
                                 <b> Starts Date: </b> {startDate + " - " + startTime}  <br />
@@ -124,10 +124,10 @@ class EventItemDetails extends Component {
 
                                 <hr />
                                 <h3> <i className="fas fa-info-circle"></i> Description</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                  laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                {this.state.description}
                                 <hr />
+
+
                                 <h2> <i className="fas fa-ticket-alt"></i> Buy a ticket Now! </h2>
 
                                 <button type="button" className="btn btn-info btn-block mt-4">PayPal</button>
