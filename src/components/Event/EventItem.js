@@ -25,17 +25,25 @@ class EventItem extends Component {
             <div>
 
                 <div className="item">
+
                     <div className="eventImage">
                         <img src={eventImage} alt="sampleImage" />
                     </div>
+
                     <div className="desc">
+                        <div className="itemPrice">
+                            <h3>
+                                <i className="fas fa-ticket-alt"></i> {event.ticketPrice ? event.ticketPrice + "$" : "FREE"}
+                            </h3>
+                        </div>
                         <h3>{event.name}</h3>
                         <b> <i className="far fa-calendar-alt"> </i> Date: </b> {new Date(event.startDate).toLocaleDateString("en-US", dateOptions)} <br />
                         <b> <i className="far fa-clock"></i> Time:</b> {new Date(event.startDate).toLocaleTimeString("en-US", timeOptions)} <br />
                         <b> <i className="fas fa-thumbtack"></i> Location:</b> {event.location} <br />
-                        <b> <i className="fas fa-bullhorn"></i> Category:</b>  <br />
+                        <b> <i className="fas fa-bullhorn"></i> Category:</b> {event.category.categoryName} <br />
                         <b> <i className="fas fa-info-circle"></i> Description:</b>  {event.description} <br />
                     </div>
+
 
                     <Link to={`/eventDetails/${event.id}`} style={{ textDecoration: 'none' }}>
                         <div className="detailsbtn">

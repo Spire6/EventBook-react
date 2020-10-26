@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createEvent } from "../../actions/eventActions";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 class AddEvent extends Component {
 
@@ -14,8 +15,13 @@ class AddEvent extends Component {
             name: "",
             location: "",
             description: "",
+            ticketPrice: "",
             startDate: "",
             endDate: "",
+            category: {
+                id: "",
+                categoryName: ""
+            },
             errors: {}
         }
 
@@ -42,8 +48,10 @@ class AddEvent extends Component {
             name: this.state.name,
             location: this.state.location,
             description: this.state.description,
+            ticketPrice: this.state.ticketPrice,
             startDate: this.state.startDate,
-            endDate: this.state.endDate
+            endDate: this.state.endDate,
+            category: this.state.category
         }
 
         this.props.createEvent(newEvent, this.props.history)
@@ -87,6 +95,21 @@ class AddEvent extends Component {
                                     <div className="invalid-feedback"> {errors.location} </div>
                                 </div>
 
+                                <h6>Category</h6>
+                                <div className="form-group">
+                                    <select className="browser-default custom-select"
+                                        name="category"
+                                        value={this.state.category.id}
+                                        onChange={this.onChangeVariable}>
+                                        <option value="1" selected>Education</option>
+                                        <option value="2">Art</option>
+                                        <option value="3">Music</option>
+                                        <option value="4">Culture</option>
+                                        <option value="5">Party</option>
+                                        <option value="6">Other</option>
+                                    </select>
+                                </div>
+
                                 <h6>Description</h6>
                                 <div className="form-group">
                                     <textarea
@@ -97,6 +120,19 @@ class AddEvent extends Component {
                                         onChange={this.onChangeVariable}
                                     ></textarea>
                                     <div className="invalid-feedback"> {errors.description} </div>
+                                </div>
+
+                                <h6>Ticket price</h6>
+                                <div className="form-group">
+                                    <input
+                                        type="number"
+                                        className="browser-default custom-select"
+                                        placeholder="Free"
+                                        min="0"
+                                        name="ticketPrice"
+                                        value={this.state.ticketPrice}
+                                        onChange={this.onChangeVariable}>
+                                    </input>
                                 </div>
 
                                 <h6>Start Date</h6>
@@ -120,6 +156,13 @@ class AddEvent extends Component {
                                 </div>
 
                                 <button type="submit" className="btn btn-info btn-block mt-4">Create</button>
+
+                                <Link to={`/browseEvents`} style={{ textDecoration: 'none' }}>
+                                    <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}
+                                </Link>
+                                <br /><br />
+
+
                             </form>
                         </div>
                     </div>

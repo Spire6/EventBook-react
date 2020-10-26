@@ -161,3 +161,10 @@ div.details {
 div.backBtn {
 	padding-bottom: 20px;
 }
+
+div.itemPrice {
+  float: right;
+  color: green;
+  padding-top: 80px;
+  padding-right: 30px;
+}

@@ -16,8 +16,13 @@ class EventItemDetails extends Component {
             name: "",
             location: "",
             description: "",
+            ticketPrice: "",
             startDate: "",
-            endDate: ""
+            endDate: "",
+            category: {
+                id: "",
+                categoryName: ""
+            }
         }
     }
 
@@ -27,8 +32,10 @@ class EventItemDetails extends Component {
             name,
             location,
             description,
+            ticketPrice,
             startDate,
-            endDate
+            endDate,
+            category
         } = nextProps.event;
 
         this.setState({
@@ -36,8 +43,10 @@ class EventItemDetails extends Component {
             name,
             location,
             description,
+            ticketPrice,
             startDate,
-            endDate
+            endDate,
+            category
         });
     }
 
@@ -98,7 +107,7 @@ class EventItemDetails extends Component {
 
                             <div className="price">
                                 <h1>
-                                    <i className="fas fa-ticket-alt"></i> 49$
+                                    <i className="fas fa-ticket-alt"></i> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"}
                                 </h1>
                             </div>
 
@@ -108,7 +117,7 @@ class EventItemDetails extends Component {
                                     {" " + startDate} {" - "}
                                     {startTime}
                                 </i></b></h5>
-                                <h5> <b> <i> <i className="fas fa-bullhorn"></i> Education </i></b></h5>
+                                <h5> <b> <i> <i className="fas fa-bullhorn"></i> {this.state.category.categoryName} </i></b></h5>
                             </div>
 
 
@@ -118,9 +127,9 @@ class EventItemDetails extends Component {
                                 <b> Starts Date: </b> {startDate + " - " + startTime}  <br />
                                 <b> End Date: </b> {endDate + " - " + endTime} <br />
                                 <b>Location:</b> {this.state.location} <br />
-                                <b>Category:</b> Education <br />
+                                <b>Category:</b> {this.state.category.categoryName} <br />
                                 <b>Organizer:</b> User1 <br />
-                                <b>Ticket:</b> 49 $ <br />
+                                <b>Ticket:</b> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"} <br />
 
                                 <hr />
                                 <h3> <i className="fas fa-info-circle"></i> Description</h3>
