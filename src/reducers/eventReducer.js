@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_EVENT, DELETE_EVENT } from "../actions/types";
+import { GET_EVENTS, GET_EVENT, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY } from "../actions/types";
 
 const initialState = {
     events: [],
@@ -26,6 +26,24 @@ export default function (state = initialState, action) {
                 ...state,
                 events: state.events.filter(event => event.id !== action.payload)
             };
+
+        case GET_MONTHLY_EVENTS:
+            return {
+                ...state,
+                events: action.payload
+            };
+
+        case GET_TODAY_EVENTS:
+            return {
+                ...state,
+                events: action.payload
+            };
+
+        case GET_EVENTS_BY_CATEGORY:
+            return {
+                ...state,
+                events: action.payload
+            }
 
 
         default:

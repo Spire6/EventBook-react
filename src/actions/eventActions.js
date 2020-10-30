@@ -1,10 +1,10 @@
 import axios from "axios";
-import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT } from "./types";
+import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY } from "./types";
 
 
 export const createEvent = (project, history) => async dispatch => {
     try {
-        const res = await axios.post("/api/event", project);
+        await axios.post("/api/event", project);
         history.push("/browseEvents");
         dispatch({
             type: GET_ERRORS,
@@ -25,6 +25,10 @@ export const getEvents = () => async dispatch => {
     dispatch({
         type: GET_EVENTS,
         payload: res.data
+    });
+    dispatch({
+        type: GET_ERRORS,
+        payload: {}
     });
 };
 
@@ -58,3 +62,68 @@ export const deleteEvent = id => async dispatch => {
 
 
 }
+
+
+export const getMonthlyEvents = () => async dispatch => {
+    try {
+        const res = await axios.get("/api/event/month");
+        dispatch({
+            type: GET_MONTHLY_EVENTS,
+            payload: res.data
+        });
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+
+};
+
+
+export const getTodayEvents = () => async dispatch => {
+    try {
+        const res = await axios.get("/api/event/today");
+        dispatch({
+            type: GET_TODAY_EVENTS,
+            payload: res.data
+        });
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+
+
+};
+
+
+export const getEventsByCategory = (category) => async dispatch => {
+    try {
+        const res = await axios.get(`/api/event/all/${category}`);
+        dispatch({
+            type: GET_EVENTS_BY_CATEGORY,
+            payload: res.data
+        });
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+
+}
+

@@ -103,7 +103,7 @@ class UpdateEvent extends Component {
                     <div className="row">
                         <div className="col-md-8 m-auto">
                             <h5 className="display-4 text-center">Edit Event</h5>
-                            <h1 class="text-center"> {this.state.name} </h1>
+                            <h1 className="text-center"> {this.state.name} </h1>
                             <hr /><br />
 
                             <form onSubmit={this.onSubmitVariable}>

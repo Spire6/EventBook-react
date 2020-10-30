@@ -26,28 +26,9 @@ class EventItemDetails extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        const {
-            id,
-            name,
-            location,
-            description,
-            ticketPrice,
-            startDate,
-            endDate,
-            category
-        } = nextProps.event;
-
-        this.setState({
-            id,
-            name,
-            location,
-            description,
-            ticketPrice,
-            startDate,
-            endDate,
-            category
-        });
+    static getDerivedStateFromProps(nextProps, state) {
+        //state = nextProps.event;
+        return nextProps.event;
     }
 
 

@@ -40,7 +40,8 @@ class Header extends Component {
 
                             </ul>
 
-                            <button className="btn btn btn-success my-2 my-sm-0" type="submit"> Sign up/Log in</button>
+                            <button className="btn btn btn-secondary my-2 my-sm-0" type="submit">Log in</button>
+                            <button className="btn btn btn-success my-2 my-sm-0" type="submit">Register</button>
 
                         </div>
 
