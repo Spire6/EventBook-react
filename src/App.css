@@ -100,10 +100,12 @@ div.bigbtn-text {
 
 div.longDetails {
   padding-top: 30px;
-  padding-right: 300px;
+  font-size: 17px;
 }
 
-
+iframe.googleMap {
+  float: right;
+}
 
 
 

@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteEvent } from "../actions/eventActions";
+import { GOOGLE_API_KEY } from "../maps/config";
 
 class EventItemDetails extends Component {
 
@@ -74,11 +75,10 @@ class EventItemDetails extends Component {
                                     <button type="button" className="btn btn-success mt-4"><i className="fas fa-edit"></i> Edit </button> {" "}
                                 </Link>
 
-                                <Link to={"/browseEvents"} style={{ textDecoration: 'none' }}>
-                                    <button type="button" className="btn btn-danger mt-4" onClick={this.onDeleteClick.bind(this, this.state.id)}>
-                                        <i className="fas fa-trash-alt" ></i> Remove
-                                    </button>
-                                </Link>
+                                <button type="button" className="btn btn-danger mt-4" onClick={this.onDeleteClick.bind(this, this.state.id)}>
+                                    <i className="fas fa-trash-alt" ></i> Remove
+                                </button>
+
 
                             </div>
 
@@ -103,6 +103,14 @@ class EventItemDetails extends Component {
 
 
                             <div className="longDetails">
+                                <iframe className="googleMap"
+                                    title="map"
+                                    width="450"
+                                    height="230"
+                                    frameborder="0"
+                                    src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${this.state.location}`} allowfullscreen>
+                                </iframe>
+
                                 <h3> <i className="fas fa-calendar-alt"></i> Details</h3>
 
                                 <b> Starts Date: </b> {startDate + " - " + startTime}  <br />
@@ -110,7 +118,7 @@ class EventItemDetails extends Component {
                                 <b>Location:</b> {this.state.location} <br />
                                 <b>Category:</b> {this.state.category.categoryName} <br />
                                 <b>Organizer:</b> User1 <br />
-                                <b>Ticket:</b> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"} <br />
+                                <b>Ticket:</b> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"} <br /> <br />
 
                                 <hr />
                                 <h3> <i className="fas fa-info-circle"></i> Description</h3>
@@ -122,6 +130,8 @@ class EventItemDetails extends Component {
 
                                 <button type="button" className="btn btn-info btn-block mt-4">PayPal</button>
                                 <button type="button" className="btn btn-info btn-block mt-4">Debit or Credit Card</button>
+
+
 
                             </div>
                         </div>

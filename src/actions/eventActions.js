@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY } from "./types";
+import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS } from "./types";
 
 
 export const createEvent = (project, history) => async dispatch => {
@@ -51,9 +51,10 @@ export const getEvent = (id, history) => async dispatch => {
 };
 
 
-export const deleteEvent = id => async dispatch => {
+export const deleteEvent = (id, history) => async dispatch => {
     if (window.confirm("Are you sure? This will delete the event!")) {
         await axios.delete(`/api/event/${id}`);
+        history.push("/browseEvents");
         dispatch({
             type: DELETE_EVENT,
             payload: id
@@ -125,5 +126,32 @@ export const getEventsByCategory = (category) => async dispatch => {
         });
     }
 
+};
+
+export const getEventsByName = (title) => async dispatch => {
+    try {
+        const res = await axios.get(`/api/event/search?title=${title}`);
+        dispatch({
+            type: GET_EVENTS_BY_NAME,
+            payload: res.data
+        });
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+};
+
+export const getNumbersOfEvents = () => async dispatch => {
+    const res = await axios.get(`/api/event/count`);
+    dispatch({
+        type: GET_NUMBERS_OF_EVENTS,
+        payload: res.data
+    });
 }
 

@@ -61,6 +61,10 @@ class UpdateEvent extends Component {
         });
     }
 
+    /* static getDerivedStateFromProps(props, state, prevProps) {
+         return null;
+     } */
+
 
     componentDidMount() {
         const { id } = this.props.match.params;
@@ -136,7 +140,7 @@ class UpdateEvent extends Component {
                                         name="category"
                                         value={this.state.category.id}
                                         onChange={this.onChangeVariable}>
-                                        <option value="1" selected>Education</option>
+                                        <option value="1">Education</option>
                                         <option value="2">Art</option>
                                         <option value="3">Music</option>
                                         <option value="4">Culture</option>
