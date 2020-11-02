@@ -94,7 +94,7 @@ class BrowseEvents extends Component {
                                     <div style={style}>
 
                                         <form className="navbar-form navbar-left" role="search">
-                                            <h3> <i className="fas fa-search"></i> Find your event!</h3> <hr /><br />
+                                            <h3> <i className="fas fa-search"></i> Find your event!</h3> <hr />
                                             <h6>Name</h6>
                                             <div className="form-group">
                                                 <input type="text" className="form-control" placeholder="Quize night..." onChange={e => this.searchByNameOnChange(e.target.value)} />

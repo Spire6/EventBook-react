@@ -170,3 +170,8 @@ div.itemPrice {
   padding-top: 80px;
   padding-right: 30px;
 }
+
+img.fixedSizeImg{
+  height: 200px;
+  width: 295px;
+}

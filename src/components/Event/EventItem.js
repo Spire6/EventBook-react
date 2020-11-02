@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import eventImage from "../../Images/eventimage.jpg";
+//import eventImage from "../../Images/eventimage.jpg";
 import { Link } from "react-router-dom";
 
 class EventItem extends Component {
@@ -27,7 +27,7 @@ class EventItem extends Component {
                 <div className="item">
 
                     <div className="eventImage">
-                        <img src={eventImage} alt="sampleImage" />
+                        <img className="fixedSizeImg" src={`/api/event/image/${event.imageName}`} alt="sampleImage" />
                     </div>
 
                     <div className="desc">

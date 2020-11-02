@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import eventImage from "../Images/eventimage.jpg";
+//import eventImage from "../Images/eventimage.jpg";
 import { getEvent } from "../actions/eventActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -17,6 +17,7 @@ class EventItemDetails extends Component {
             name: "",
             location: "",
             description: "",
+            imageName: "",
             ticketPrice: "",
             startDate: "",
             endDate: "",
@@ -39,7 +40,7 @@ class EventItemDetails extends Component {
     }
 
     onDeleteClick = id => {
-        this.props.deleteEvent(id);
+        this.props.deleteEvent(id, this.props.history);
     }
 
 
@@ -60,6 +61,7 @@ class EventItemDetails extends Component {
         const startTime = new Date(this.state.startDate).toLocaleTimeString("en-US", timeOptions);
         const endDate = new Date(this.state.endDate).toLocaleDateString("en-US", dateOptions);
         const endTime = new Date(this.state.endDate).toLocaleTimeString("en-US", timeOptions);
+        const imageUrl = `/api/event/image/${this.state.imageName}`;
 
         return (
 
@@ -83,7 +85,7 @@ class EventItemDetails extends Component {
                             </div>
 
                             <div className="eventImageDetails">
-                                <img src={eventImage} alt="eventImage" />
+                                <img className="fixedSizeImg" src={imageUrl} alt="eventImage" />
                             </div>
 
                             <div className="price">
@@ -107,8 +109,8 @@ class EventItemDetails extends Component {
                                     title="map"
                                     width="450"
                                     height="230"
-                                    frameborder="0"
-                                    src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${this.state.location}`} allowfullscreen>
+                                    frameBorder="0"
+                                    src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${this.state.location}`} allowFullScreen>
                                 </iframe>
 
                                 <h3> <i className="fas fa-calendar-alt"></i> Details</h3>

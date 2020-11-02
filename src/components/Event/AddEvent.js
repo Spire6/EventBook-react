@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createEvent } from "../../actions/eventActions";
+import { uploadImage } from "../../actions/uploadActions";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-import { GOOGLE_API_KEY } from "../../maps/config";
 
 class AddEvent extends Component {
 
@@ -14,20 +14,22 @@ class AddEvent extends Component {
 
         this.state = {
             name: "",
-            location: "Pécs",
+            location: "",
             description: "",
+            imageName: "default.jpg",
             ticketPrice: "",
             startDate: "",
             endDate: "",
             category: {
-                id: "",
+                id: "1",
                 categoryName: ""
             },
-            errors: {}
+            errors: {},
+            selectedFile: null
         }
 
         this.onChangeVariable = this.onChange.bind(this);
-        this.onSubmitVariable = this.onSubmit.bind(this)
+        this.onSubmitVariable = this.onSubmit.bind(this);
     }
 
 
@@ -42,6 +44,7 @@ class AddEvent extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
+
     onSubmit(e) {
         e.preventDefault();
 
@@ -49,19 +52,49 @@ class AddEvent extends Component {
             name: this.state.name,
             location: this.state.location,
             description: this.state.description,
+            imageName: this.state.imageName,
             ticketPrice: this.state.ticketPrice,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
             category: this.state.category
         }
 
+        if (this.state.selectedFile !== null) {
+
+            const fd = new FormData();
+            fd.append('imageFile', this.state.selectedFile);
+            fd.append('imageName', this.state.imageName);
+
+            this.props.uploadImage(fd);
+            //this.fileUploadHandler();
+        }
+
         this.props.createEvent(newEvent, this.props.history)
     }
 
 
+
+    fileSelectedHandler = event => {
+        const timestamp = Date.now();
+        this.setState({
+            selectedFile: event.target.files[0],
+            imageName: timestamp + ".jpg"
+        })
+    }
+
+    /*fileUploadHandler = () => {
+        const fd = new FormData();
+        fd.append('imageFile', this.state.selectedFile);
+        fd.append('imageName', this.state.imageName);
+        axios.post('http://localhost:8080/api/event/uploadimage', fd)
+            .then(res => {
+                console.log(res);
+            });
+    }*/
+
     render() {
 
-        const { errors } = this.state
+        const { errors } = this.state;
 
         return (
 
@@ -156,13 +189,17 @@ class AddEvent extends Component {
                                 <div className="invalid-feedback"> {errors.endDate} </div>
                             </div>
 
+                            <h6>Upload image</h6>
+                            <div className="form-group files color">
+                                <input className="imageInput" type="file" onChange={this.fileSelectedHandler} />
+                            </div><br />
+
                             <button type="submit" className="btn btn-info btn-block mt-4">Create</button>
 
                             <Link to={`/browseEvents`} style={{ textDecoration: 'none' }}>
                                 <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}
                             </Link>
                             <br /><br />
-
 
                         </form>
                     </div>
@@ -177,6 +214,7 @@ class AddEvent extends Component {
 
 AddEvent.propTypes = {
     createEvent: PropTypes.func.isRequired,
+    uploadImage: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 }
 
@@ -185,4 +223,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { createEvent })(AddEvent);
+export default connect(mapStateToProps, { createEvent, uploadImage })(AddEvent);
