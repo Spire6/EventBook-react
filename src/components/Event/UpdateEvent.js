@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { getEvent, createEvent } from "../../actions/eventActions";
+import { uploadImage } from "../../actions/uploadActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import moment from "moment";
-//import moment from "moment-timezone";
+
+
 
 class UpdateEvent extends Component {
 
@@ -17,6 +19,7 @@ class UpdateEvent extends Component {
             name: "",
             location: "",
             description: "",
+            imageName: "",
             ticketPrice: "",
             startDate: "",
             endDate: "",
@@ -24,11 +27,12 @@ class UpdateEvent extends Component {
                 id: "",
                 categoryName: ""
             },
-            errors: {}
+            errors: {},
+            selectedFile: null
         }
 
         this.onChangeVariable = this.onChange.bind(this);
-        this.onSubmitVariable = this.onSubmit.bind(this)
+        this.onSubmitVariable = this.onSubmit.bind(this);
     }
 
 
@@ -43,6 +47,7 @@ class UpdateEvent extends Component {
             name,
             location,
             description,
+            imageName,
             ticketPrice,
             startDate,
             endDate,
@@ -54,6 +59,7 @@ class UpdateEvent extends Component {
             name,
             location,
             description,
+            imageName,
             ticketPrice,
             startDate,
             endDate,
@@ -71,7 +77,6 @@ class UpdateEvent extends Component {
         this.props.getEvent(id, this.props.history);
     }
 
-
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     }
@@ -84,13 +89,32 @@ class UpdateEvent extends Component {
             name: this.state.name,
             location: this.state.location,
             description: this.state.description,
+            imageName: this.state.imageName,
             ticketPrice: this.state.ticketPrice,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
             category: this.state.category
         }
 
+        if (this.state.selectedFile !== null) {
+
+            const fd = new FormData();
+            fd.append('imageFile', this.state.selectedFile);
+            fd.append('imageName', this.state.imageName);
+
+            this.props.uploadImage(fd);
+        }
+
         this.props.createEvent(updatedEvent, this.props.history)
+    }
+
+
+    fileSelectedHandler = event => {
+        const timestamp = Date.now();
+        this.setState({
+            selectedFile: event.target.files[0],
+            imageName: timestamp + ".jpg"
+        });
     }
 
 
@@ -100,17 +124,24 @@ class UpdateEvent extends Component {
         const startDate = moment(this.state.startDate).format("yyyy-MM-DDThh:mm")
         const endDate = moment(this.state.endDate).format("yyyy-MM-DDThh:mm")
 
+
         return (
 
             <div className="project">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <h5 className="display-4 text-center">Edit Event</h5>
-                            <h1 className="text-center"> {this.state.name} </h1>
-                            <hr /><br />
+
+                            <div className="updateTitle">
+                                <img className="fixedSizeImg float-right" src={`/api/event/image/${this.state.imageName}`} alt="" />
+                                <h5 className="display-4">Edit Event</h5>
+                                <h1 className=""> {this.state.name} </h1>
+                            </div>
+
+                            <hr />
 
                             <form onSubmit={this.onSubmitVariable}>
+
                                 <h6>Event name</h6>
                                 <div className="form-group">
                                     <input type="text"
@@ -191,7 +222,13 @@ class UpdateEvent extends Component {
                                         name="endDate"
                                         value={endDate}
                                         onChange={this.onChangeVariable} />
-                                </div>
+                                </div> <br />
+
+                                <h6>Change event image</h6>
+                                <div className="form-group files color">
+                                    <input className="imageInput" type="file" onChange={this.fileSelectedHandler} />
+                                </div><br />
+
 
                                 <button type="submit" className="btn btn-info btn-block mt-4">Save event</button>
 
@@ -214,6 +251,7 @@ class UpdateEvent extends Component {
 UpdateEvent.propTypes = {
     getEvent: PropTypes.func.isRequired,
     createEvent: PropTypes.func.isRequired,
+    uploadImage: PropTypes.func.isRequired,
     event: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
@@ -223,4 +261,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { getEvent, createEvent })(UpdateEvent);
+export default connect(mapStateToProps, { getEvent, createEvent, uploadImage })(UpdateEvent);

@@ -66,7 +66,6 @@ class AddEvent extends Component {
             fd.append('imageName', this.state.imageName);
 
             this.props.uploadImage(fd);
-            //this.fileUploadHandler();
         }
 
         this.props.createEvent(newEvent, this.props.history)
@@ -187,7 +186,7 @@ class AddEvent extends Component {
                                     value={this.state.endDate}
                                     onChange={this.onChangeVariable} />
                                 <div className="invalid-feedback"> {errors.endDate} </div>
-                            </div>
+                            </div> <br />
 
                             <h6>Upload image</h6>
                             <div className="form-group files color">

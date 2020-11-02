@@ -2,10 +2,10 @@ import axios from "axios";
 import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS } from "./types";
 
 
-export const createEvent = (project, history) => async dispatch => {
+export const createEvent = (event, history) => async dispatch => {
     try {
-        await axios.post("/api/event", project);
-        history.push("/browseEvents");
+        await axios.post("/api/event", event);
+        history.push(`/eventDetails/${event.id}`);
         dispatch({
             type: GET_ERRORS,
             payload: {}

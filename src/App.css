@@ -175,3 +175,13 @@ img.fixedSizeImg{
   height: 200px;
   width: 295px;
 }
+
+div.updateTitle {
+  padding-bottom: 50px;
+  height: 190px;
+}
+
+h1.updateEventName {
+  color: red;
+  float: right;
+}
