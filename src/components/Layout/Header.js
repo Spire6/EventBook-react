@@ -1,10 +1,72 @@
 import React, { Component } from 'react';
 import logo from "../../Images/logo.png";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logout } from "../../actions/securityActions.js";
 
 class Header extends Component {
 
+
+    logout() {
+        this.props.logout();
+        window.location.href = "/";
+    }
+
     render() {
+
+        const { validToken, user } = this.props.security;
+
+        const userIsAuthenticated = (
+            <div className="collapse navbar-collapse" id="mobile-nav">
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <Link to="/login" className="nav-link active" style={{ textDecoration: 'none' }}>
+                            <i class="fas fa-user"></i>
+                            {" " + user.fullName}
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link to="/logout" onClick={this.logout.bind(this)} style={{ textDecoration: 'none' }}>
+                            <button className="btn btn btn-danger my-2 my-sm-0" type="button"> <i class="fas fa-sign-out-alt"></i> Logout</button>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+        );
+
+        const userIsNotAuthenticated = (
+            <div className="collapse navbar-collapse" id="mobile-nav">
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <Link to="/login" style={{ textDecoration: 'none' }}>
+                            <button className="btn btn btn-secondary my-2 my-sm-0" type="button"> <i className="fas fa-sign-in-alt"></i> Login</button>
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link to="/register" style={{ textDecoration: 'none' }}>
+                            <button className="btn btn btn-success my-2 my-sm-0" type="button"> <i className="fas fa-user-plus"></i> Register</button>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+        );
+
+
+
+        let headerLinks;
+
+
+        if (validToken && user) {
+            headerLinks = userIsAuthenticated;
+        } else {
+            headerLinks = userIsNotAuthenticated;
+        }
+
+
+
         return (
             <React.Fragment>
                 <div>
@@ -40,13 +102,8 @@ class Header extends Component {
 
                             </ul>
 
-                            <Link to="/login" style={{ textDecoration: 'none' }}>
-                                <button className="btn btn btn-secondary my-2 my-sm-0" type="button"> <i className="fas fa-sign-in-alt"></i> Login</button>
-                            </Link>
+                            {headerLinks}
 
-                            <Link to="/register" style={{ textDecoration: 'none' }}>
-                                <button className="btn btn btn-success my-2 my-sm-0" type="button"> <i className="fas fa-user-plus"></i> Register</button>
-                            </Link>
                         </div>
 
 
@@ -57,4 +114,14 @@ class Header extends Component {
     }
 }
 
-export default Header;
+
+Header.propTypes = {
+    logout: PropTypes.func.isRequired,
+    security: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    security: state.security
+});
+
+export default connect(mapStateToProps, { logout })(Header);

@@ -21,6 +21,13 @@ class Register extends Component {
         this.onSubmitVariable = this.onSubmit.bind(this);
     }
 
+
+    static getDerivedStateFromProps(nextProps, state) {
+        if (nextProps.errors) {
+            return { errors: nextProps.errors }
+        }
+    }
+
     onSubmit(e) {
         e.preventDefault();
         const newUser = {
@@ -39,6 +46,9 @@ class Register extends Component {
     }
 
     render() {
+
+        const { errors } = this.state;
+
         return (
             <div className="register">
                 <div className="container">
@@ -53,41 +63,61 @@ class Register extends Component {
                                 <h6>Full name</h6>
                                 <div className="form-group">
                                     <input type="text"
-                                        className="form-control form-control-lg"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.fullName })}
                                         placeholder="Full name"
                                         name="fullName"
                                         value={this.state.fullName}
                                         onChange={this.onChangeVariable} />
+                                    {
+                                        errors.fullName && (
+                                            <div className="invalid-feedback">{errors.fullName}</div>
+                                        )
+                                    }
                                 </div>
 
                                 <h6>E-mail address</h6>
                                 <div className="form-group">
                                     <input type="email"
-                                        className="form-control form-control-lg"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.username })}
                                         placeholder="E-mail"
                                         name="username"
                                         value={this.state.username}
                                         onChange={this.onChangeVariable} />
+                                    {
+                                        errors.username && (
+                                            <div className="invalid-feedback">{errors.username}</div>
+                                        )
+                                    }
                                 </div>
 
                                 <h6>Password </h6>
                                 <div className="form-group">
                                     <input type="password"
-                                        className="form-control form-control-lg"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.password })}
                                         placeholder="Password"
                                         name="password"
                                         value={this.state.password}
                                         onChange={this.onChangeVariable} />
+                                    {
+                                        errors.password && (
+                                            <div className="invalid-feedback">{errors.password}</div>
+                                        )
+                                    }
                                 </div>
 
                                 <h6>Confirm password </h6>
                                 <div className="form-group">
                                     <input type="password"
-                                        className="form-control form-control-lg"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.confirmPassword })}
                                         placeholder="Confirm password"
                                         name="confirmPassword"
                                         value={this.state.confirmPassword}
                                         onChange={this.onChangeVariable} />
+                                    {
+                                        errors.confirmPassword && (
+                                            <div className="invalid-feedback">{errors.confirmPassword}</div>
+                                        )
+                                    }
                                 </div> <br />
 
                                 <button className="btn btn-block btn-info my-2 my-sm-0" type="submit"> <i className="fas fa-user-plus"></i> Create user</button>

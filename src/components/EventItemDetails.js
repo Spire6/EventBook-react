@@ -21,6 +21,7 @@ class EventItemDetails extends Component {
             ticketPrice: "",
             startDate: "",
             endDate: "",
+            organizer: "",
             category: {
                 id: "",
                 categoryName: ""
@@ -119,7 +120,7 @@ class EventItemDetails extends Component {
                                 <b> End Date: </b> {endDate + " - " + endTime} <br />
                                 <b>Location:</b> {this.state.location} <br />
                                 <b>Category:</b> {this.state.category.categoryName} <br />
-                                <b>Organizer:</b> User1 <br />
+                                <b>Organizer:</b> {this.state.organizer} <br />
                                 <b>Ticket:</b> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"} <br /> <br />
 
                                 <hr />

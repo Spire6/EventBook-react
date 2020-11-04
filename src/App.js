@@ -12,6 +12,33 @@ import EventItemDetails from './components/EventItemDetails';
 import UpdateEvent from './components/Event/UpdateEvent';
 import Register from './components/UserManagement/Register';
 import Login from './components/UserManagement/Login';
+import jwt_decode from "jwt-decode";
+import setJWTToken from "./securityUtils/setJWTToken";
+import { SET_CURRENT_USER } from './actions/types';
+import { logout } from './actions/securityActions';
+
+
+//token from the local storage
+const jwtToken = localStorage.jwtToken;
+const currentTime = Date.now() / 1000;
+
+if (jwtToken) {
+  setJWTToken(jwtToken);
+  const decode_jwtToken = jwt_decode(jwtToken);
+
+  //dispatch back to the state
+  store.dispatch({
+    type: SET_CURRENT_USER,
+    payload: decode_jwtToken
+  });
+
+  if (decode_jwtToken.exp < currentTime) {
+    store.dispatch(logout())
+    window.location.href = "/";
+  }
+
+}
+
 
 function App() {
   return (
