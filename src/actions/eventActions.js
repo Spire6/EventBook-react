@@ -21,7 +21,7 @@ export const createEvent = (event, history) => async dispatch => {
 
 export const getEvents = () => async dispatch => {
 
-    const res = await axios.get("/api/event/all");
+    const res = await axios.get("/api/event/public/all");
     dispatch({
         type: GET_EVENTS,
         payload: res.data
@@ -36,7 +36,7 @@ export const getEvents = () => async dispatch => {
 export const getEvent = (id, history) => async dispatch => {
 
     try {
-        const res = await axios.get(`/api/event/${id}`);
+        const res = await axios.get(`/api/event/public/${id}`);
         dispatch({
             type: GET_EVENT,
             payload: res.data
@@ -67,7 +67,7 @@ export const deleteEvent = (id, history) => async dispatch => {
 
 export const getMonthlyEvents = () => async dispatch => {
     try {
-        const res = await axios.get("/api/event/month");
+        const res = await axios.get("/api/event/public/month");
         dispatch({
             type: GET_MONTHLY_EVENTS,
             payload: res.data
@@ -88,7 +88,7 @@ export const getMonthlyEvents = () => async dispatch => {
 
 export const getTodayEvents = () => async dispatch => {
     try {
-        const res = await axios.get("/api/event/today");
+        const res = await axios.get("/api/event/public/today");
         dispatch({
             type: GET_TODAY_EVENTS,
             payload: res.data
@@ -110,7 +110,7 @@ export const getTodayEvents = () => async dispatch => {
 
 export const getEventsByCategory = (category) => async dispatch => {
     try {
-        const res = await axios.get(`/api/event/all/${category}`);
+        const res = await axios.get(`/api/event/public/all/${category}`);
         dispatch({
             type: GET_EVENTS_BY_CATEGORY,
             payload: res.data
@@ -130,7 +130,7 @@ export const getEventsByCategory = (category) => async dispatch => {
 
 export const getEventsByName = (title) => async dispatch => {
     try {
-        const res = await axios.get(`/api/event/search?title=${title}`);
+        const res = await axios.get(`/api/event/public/search?title=${title}`);
         dispatch({
             type: GET_EVENTS_BY_NAME,
             payload: res.data
@@ -148,7 +148,7 @@ export const getEventsByName = (title) => async dispatch => {
 };
 
 export const getNumbersOfEvents = () => async dispatch => {
-    const res = await axios.get(`/api/event/count`);
+    const res = await axios.get(`/api/event/public/count`);
     dispatch({
         type: GET_NUMBERS_OF_EVENTS,
         payload: res.data

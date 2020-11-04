@@ -40,9 +40,13 @@ class Header extends Component {
 
                             </ul>
 
-                            <button className="btn btn btn-secondary my-2 my-sm-0" type="submit"> <i className="fas fa-sign-in-alt"></i> Log in</button>
-                            <button className="btn btn btn-success my-2 my-sm-0" type="submit"> <i className="fas fa-user-plus"></i> Register</button>
+                            <Link to="/login" style={{ textDecoration: 'none' }}>
+                                <button className="btn btn btn-secondary my-2 my-sm-0" type="button"> <i className="fas fa-sign-in-alt"></i> Login</button>
+                            </Link>
 
+                            <Link to="/register" style={{ textDecoration: 'none' }}>
+                                <button className="btn btn btn-success my-2 my-sm-0" type="button"> <i className="fas fa-user-plus"></i> Register</button>
+                            </Link>
                         </div>
 
 

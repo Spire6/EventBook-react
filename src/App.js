@@ -10,6 +10,8 @@ import { Provider } from "react-redux";
 import store from './store';
 import EventItemDetails from './components/EventItemDetails';
 import UpdateEvent from './components/Event/UpdateEvent';
+import Register from './components/UserManagement/Register';
+import Login from './components/UserManagement/Login';
 
 function App() {
   return (
@@ -17,11 +19,20 @@ function App() {
       <Router>
         <div className="App">
           <Header />
+          {
+            //Public Routes
+          }
           <Route exact path="/" component={Dashboard} />
-          <Route exact path="/createEvent" component={AddEvent} />
           <Route exact path="/browseEvents" component={BrowseEvents} />
           <Route exact path="/eventDetails/:id" component={EventItemDetails} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          {
+            //Private Routes
+          }
+          <Route exact path="/createEvent" component={AddEvent} />
           <Route exact path="/updateEvent/:id" component={UpdateEvent} />
+
         </div>
       </Router>
     </Provider>

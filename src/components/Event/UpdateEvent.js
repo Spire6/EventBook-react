@@ -133,7 +133,7 @@ class UpdateEvent extends Component {
                         <div className="col-md-8 m-auto">
 
                             <div className="updateTitle">
-                                <img className="fixedSizeImg float-right" src={`/api/event/image/${this.state.imageName}`} alt="" />
+                                <img className="fixedSizeImg float-right" src={`/api/event/public/image/${this.state.imageName}`} alt="" />
                                 <h5 className="display-4">Edit Event</h5>
                                 <h1 className=""> {this.state.name} </h1>
                             </div>

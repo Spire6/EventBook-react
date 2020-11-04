@@ -61,7 +61,7 @@ class EventItemDetails extends Component {
         const startTime = new Date(this.state.startDate).toLocaleTimeString("en-US", timeOptions);
         const endDate = new Date(this.state.endDate).toLocaleDateString("en-US", dateOptions);
         const endTime = new Date(this.state.endDate).toLocaleTimeString("en-US", timeOptions);
-        const imageUrl = `/api/event/image/${this.state.imageName}`;
+        const imageUrl = `/api/event/public/image/${this.state.imageName}`;
 
         return (
 
