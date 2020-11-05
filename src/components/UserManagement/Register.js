@@ -21,6 +21,12 @@ class Register extends Component {
         this.onSubmitVariable = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        //redirect - Don't show registration for logged in users                                
+        if (this.props.security.validToken) {
+            this.props.history.push("/");
+        }
+    }
 
     static getDerivedStateFromProps(nextProps, state) {
         if (nextProps.errors) {
@@ -138,10 +144,13 @@ class Register extends Component {
 Register.propTypes = {
     createNewUser: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
+    security: PropTypes.object.isRequired
+
 }
 
 const mapStateToProps = state => ({
-    errors: state.errors
+    errors: state.errors,
+    security: state.security
 });
 
 export default connect(mapStateToProps, { createNewUser })(Register);

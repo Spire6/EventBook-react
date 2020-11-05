@@ -19,6 +19,12 @@ class Login extends Component {
         this.onSubmitVariable = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        //redirect - Don't show login for logged in users                                
+        if (this.props.security.validToken) {
+            this.props.history.push("/");
+        }
+    }
 
 
     componentWillReceiveProps(nextProps) {

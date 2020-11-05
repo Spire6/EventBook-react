@@ -4,7 +4,7 @@ import Dashboard from './components/Dashboard';
 import Header from './components/Layout/Header';
 import "bootstrap/dist/css/bootstrap.min.css"
 import BrowseEvents from './components/BrowseEvents';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AddEvent from './components/Event/AddEvent';
 import { Provider } from "react-redux";
 import store from './store';
@@ -16,6 +16,7 @@ import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from './actions/types';
 import { logout } from './actions/securityActions';
+import SecuredRoute from "./securityUtils/SecureRoute";
 
 
 //token from the local storage
@@ -46,6 +47,7 @@ function App() {
       <Router>
         <div className="App">
           <Header />
+
           {
             //Public Routes
           }
@@ -54,12 +56,14 @@ function App() {
           <Route exact path="/eventDetails/:id" component={EventItemDetails} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+
           {
             //Private Routes
           }
-          <Route exact path="/createEvent" component={AddEvent} />
-          <Route exact path="/updateEvent/:id" component={UpdateEvent} />
-
+          <Switch>
+            <SecuredRoute exact path="/createEvent" component={AddEvent} />
+            <SecuredRoute exact path="/updateEvent/:id" component={UpdateEvent} />
+          </Switch>
         </div>
       </Router>
     </Provider>
