@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  //<React.StrictMode> - eredetileg
+  //<React.StrictMode>
   <React.Fragment>
     <App />
   </React.Fragment>,

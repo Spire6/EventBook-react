@@ -3,6 +3,8 @@ export const GET_EVENTS = "GET_EVENTS";
 export const GET_EVENT = "GET_EVENT";
 export const DELETE_EVENT = "DELETE_EVENT";
 
+export const GET_ALL_CATEGORY = "GET_ALL_CATEGORY";
+
 export const GET_MONTHLY_EVENTS = "GET_MONTHLY_EVENTS";
 export const GET_TODAY_EVENTS = "GET_TODAY_EVENTS";
 export const GET_EVENTS_BY_CATEGORY = "GET_EVENTS_BY_CATEGORY";

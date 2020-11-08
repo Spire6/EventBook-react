@@ -1,9 +1,10 @@
-import { GET_EVENTS, GET_EVENT, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS } from "../actions/types";
+import { GET_EVENTS, GET_EVENT, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS, GET_ALL_CATEGORY } from "../actions/types";
 
 const initialState = {
     events: [],
     event: {},
-    countEvents: {}
+    countEvents: {},
+    categories: []
 };
 
 
@@ -56,6 +57,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 countEvents: action.payload
+            }
+
+        case GET_ALL_CATEGORY:
+            return {
+                ...state,
+                categories: action.payload
             }
 
         default:

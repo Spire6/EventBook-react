@@ -22,14 +22,14 @@ class Header extends Component {
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                         <Link to="/login" className="nav-link active" style={{ textDecoration: 'none' }}>
-                            <i class="fas fa-user"></i>
+                            <i className="fas fa-user"></i>
                             {" " + user.fullName}
                         </Link>
                     </li>
 
                     <li>
                         <Link to="/logout" onClick={this.logout.bind(this)} style={{ textDecoration: 'none' }}>
-                            <button className="btn btn btn-danger my-2 my-sm-0" type="button"> <i class="fas fa-sign-out-alt"></i> Logout</button>
+                            <button className="btn btn btn-danger my-2 my-sm-0" type="button"> <i className="fas fa-sign-out-alt"></i> Logout</button>
                         </Link>
                     </li>
                 </ul>

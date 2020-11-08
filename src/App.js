@@ -19,6 +19,7 @@ import { logout } from './actions/securityActions';
 import SecuredRoute from "./securityUtils/SecureRoute";
 
 
+
 //token from the local storage
 const jwtToken = localStorage.jwtToken;
 const currentTime = Date.now() / 1000;
@@ -56,6 +57,7 @@ function App() {
           <Route exact path="/eventDetails/:id" component={EventItemDetails} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+
 
           {
             //Private Routes

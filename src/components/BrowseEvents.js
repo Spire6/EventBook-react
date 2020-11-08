@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EventItem from './Event/EventItem';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents } from "../actions/eventActions";
+import { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories } from "../actions/eventActions";
 import PropTypes from "prop-types";
 import { StickyContainer, Sticky } from "react-sticky";
 
@@ -24,6 +24,7 @@ class BrowseEvents extends Component {
     }
 
     componentDidMount() {
+        this.props.getAllCategories()
         this.props.getEvents();
         this.props.getNumbersOfEvents();
     }
@@ -53,6 +54,8 @@ class BrowseEvents extends Component {
         const { errors } = this.state;
         const { events } = this.props.event;
         const { countEvents } = this.props.event;
+        const { categories } = this.props.event;
+
         let BoardContent;
 
         const boardAlgorithm = (errors) => {
@@ -75,10 +78,13 @@ class BrowseEvents extends Component {
                                 <EventItem key={event.id} event={event} />
                             ))
                         }
+
                     </div>
                 );
             }
         }
+
+
 
         BoardContent = boardAlgorithm(errors);
 
@@ -97,7 +103,7 @@ class BrowseEvents extends Component {
                                             <h3> <i className="fas fa-search"></i> Find your event!</h3> <hr />
                                             <h6>Name</h6>
                                             <div className="form-group">
-                                                <input type="text" className="form-control" placeholder="Quize night..." onChange={e => this.searchByNameOnChange(e.target.value)} />
+                                                <input type="text" className="form-control" placeholder="Event name" onChange={e => this.searchByNameOnChange(e.target.value)} />
                                             </div>
 
                                             <h6>Category</h6>
@@ -106,14 +112,14 @@ class BrowseEvents extends Component {
                                                     name="category"
                                                     onChange={e => this.categoryOnChange(e.target.value)}>
                                                     <option value="">All category</option>
-                                                    <option value="Education">Education</option>
-                                                    <option value="Art">Art</option>
-                                                    <option value="Music">Music</option>
-                                                    <option value="Culture">Culture</option>
-                                                    <option value="Party">Party</option>
-                                                    <option value="Other">Other</option>
+                                                    {
+                                                        categories.map(cat => (
+                                                            <option key={cat.id} value={cat.categoryName}>{cat.categoryName}</option>
+                                                        ))
+                                                    }
                                                 </select>
                                             </div>
+
                                         </form> <br />
 
                                         <Link to="/createEvent" style={{ textDecoration: 'none' }}>
@@ -147,6 +153,7 @@ BrowseEvents.propTypes = {
     getEventsByCategory: PropTypes.func.isRequired,
     getEventsByName: PropTypes.func.isRequired,
     getNumbersOfEvents: PropTypes.func.isRequired,
+    getAllCategories: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 };
 
@@ -155,4 +162,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents })(BrowseEvents);
+export default connect(mapStateToProps, { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories })(BrowseEvents);

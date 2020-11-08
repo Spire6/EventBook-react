@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createEvent } from "../../actions/eventActions";
-import { uploadImage } from "../../actions/uploadActions";
+import { createEvent, getAllCategories } from "../../actions/eventActions";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
+import bsCustomFileInput from 'bs-custom-file-input';
 
 class AddEvent extends Component {
 
@@ -39,6 +39,10 @@ class AddEvent extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.getAllCategories();
+        bsCustomFileInput.init();
+    }
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
@@ -57,6 +61,8 @@ class AddEvent extends Component {
             startDate: this.state.startDate,
             endDate: this.state.endDate,
             category: this.state.category
+
+
         }
 
         if (this.state.selectedFile !== null) {
@@ -65,10 +71,11 @@ class AddEvent extends Component {
             fd.append('imageFile', this.state.selectedFile);
             fd.append('imageName', this.state.imageName);
 
-            this.props.uploadImage(fd);
+            this.props.createEvent(newEvent, this.props.history, fd)
+        } else {
+            this.props.createEvent(newEvent, this.props.history, null)
         }
 
-        this.props.createEvent(newEvent, this.props.history)
     }
 
 
@@ -81,19 +88,11 @@ class AddEvent extends Component {
         })
     }
 
-    /*fileUploadHandler = () => {
-        const fd = new FormData();
-        fd.append('imageFile', this.state.selectedFile);
-        fd.append('imageName', this.state.imageName);
-        axios.post('http://localhost:8080/api/event/uploadimage', fd)
-            .then(res => {
-                console.log(res);
-            });
-    }*/
 
     render() {
 
         const { errors } = this.state;
+        const { categories } = this.props.event;
 
         return (
 
@@ -132,16 +131,18 @@ class AddEvent extends Component {
                                 <select className="browser-default custom-select"
                                     name="category"
                                     value={this.state.category.id}
-                                    onChange={this.onChangeVariable}
-                                >
-                                    <option value="1">Education</option>
-                                    <option value="2">Art</option>
-                                    <option value="3">Music</option>
-                                    <option value="4">Culture</option>
-                                    <option value="5">Party</option>
-                                    <option value="6">Other</option>
+                                    onChange={this.onChangeVariable} >
+                                    {
+                                        categories.map(cat => (
+                                            <option key={cat.id} value={cat.id}>{cat.categoryName}</option>
+                                        ))
+                                    }
                                 </select>
                             </div>
+
+
+
+
 
                             <h6>Description</h6>
                             <div className="form-group">
@@ -189,8 +190,16 @@ class AddEvent extends Component {
                             </div> <br />
 
                             <h6>Upload image</h6>
-                            <div className="form-group files color">
-                                <input className="imageInput" type="file" onChange={this.fileSelectedHandler} />
+                            <div className="form-group">
+                                <div className="custom-file">
+                                    <input id="inputGroupFile01"
+                                        type="file"
+                                        className={classnames("custom-file-input", { "is-invalid": errors.image })}
+                                        accept="image/x-png,image/jpeg"
+                                        onChange={this.fileSelectedHandler} />
+                                    <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file (jpg/png)</label>
+                                    {errors.image && <div className="invalid-feedback">{errors.image}</div>}
+                                </div>
                             </div><br />
 
                             <button type="submit" className="btn btn-info btn-block mt-4">Create</button>
@@ -213,13 +222,14 @@ class AddEvent extends Component {
 
 AddEvent.propTypes = {
     createEvent: PropTypes.func.isRequired,
-    uploadImage: PropTypes.func.isRequired,
+    getAllCategories: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 }
 
 
 const mapStateToProps = state => ({
+    event: state.event,
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { createEvent, uploadImage })(AddEvent);
+export default connect(mapStateToProps, { createEvent, getAllCategories })(AddEvent);

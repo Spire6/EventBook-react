@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteEvent } from "../actions/eventActions";
 import { GOOGLE_API_KEY } from "../maps/config";
+import Paypal from './PayPal/PayPal';
 
 class EventItemDetails extends Component {
 
@@ -22,6 +23,7 @@ class EventItemDetails extends Component {
             startDate: "",
             endDate: "",
             organizer: "",
+            organizerEmail: "",
             category: {
                 id: "",
                 categoryName: ""
@@ -46,6 +48,10 @@ class EventItemDetails extends Component {
 
 
     render() {
+
+        const { user } = this.props.security;
+        const { event } = this.props;
+
         const dateOptions = {
             weekday: "long",
             year: "numeric",
@@ -58,11 +64,47 @@ class EventItemDetails extends Component {
             hour: "2-digit",
             minute: "2-digit"
         };
+
         const startDate = new Date(this.state.startDate).toLocaleDateString("en-US", dateOptions);
         const startTime = new Date(this.state.startDate).toLocaleTimeString("en-US", timeOptions);
         const endDate = new Date(this.state.endDate).toLocaleDateString("en-US", dateOptions);
         const endTime = new Date(this.state.endDate).toLocaleTimeString("en-US", timeOptions);
-        const imageUrl = `/api/event/public/image/${this.state.imageName}`;
+        const imageUrl = `http://localhost:8080/api/event/public/image/${event.imageName}`;
+
+        const activeUserButtons = (
+            <div>
+                <Link to={"/browseEvents"} style={{ textDecoration: 'none' }}>
+                    <button type="button" className="btn btn-info mt-4"><i className="fas fa-arrow-circle-left"></i> Back to to events </button> {" "}
+                </Link>
+
+                <Link to={`/updateEvent/${this.state.id}`} style={{ textDecoration: 'none' }}>
+                    <button type="button" className="btn btn-success mt-4 inactive"> <i className="fas fa-edit"></i> Edit </button> {" "}
+                </Link>
+
+                <button type="button" className="btn btn-danger mt-4" onClick={this.onDeleteClick.bind(this, this.state.id)}>
+                    <i className="fas fa-trash-alt" ></i> Remove
+        </button>
+            </div>
+        );
+
+        const notActiveUserButtons = (
+            <div>
+                <Link to={"/browseEvents"} style={{ textDecoration: 'none' }}>
+                    <button type="button" className="btn btn-info mt-4"><i className="fas fa-arrow-circle-left"></i> Back to to events </button> {" "}
+                </Link>
+
+            </div>
+        );
+
+
+        let editDeleteButtons;
+
+        if (user.username === this.state.organizerEmail) {
+            editDeleteButtons = activeUserButtons;
+        } else {
+            editDeleteButtons = notActiveUserButtons;
+        }
+
 
         return (
 
@@ -71,17 +113,8 @@ class EventItemDetails extends Component {
                     <div className="col-sm-12">
                         <div className="itemDetails">
                             <div className="backBtn">
-                                <Link to={"/browseEvents"} style={{ textDecoration: 'none' }}>
-                                    <button type="button" className="btn btn-info mt-4"><i className="fas fa-arrow-circle-left"></i> Back to to events </button> {" "}
-                                </Link>
-                                <Link to={`/updateEvent/${this.state.id}`} style={{ textDecoration: 'none' }}>
-                                    <button type="button" className="btn btn-success mt-4"><i className="fas fa-edit"></i> Edit </button> {" "}
-                                </Link>
 
-                                <button type="button" className="btn btn-danger mt-4" onClick={this.onDeleteClick.bind(this, this.state.id)}>
-                                    <i className="fas fa-trash-alt" ></i> Remove
-                                </button>
-
+                                {editDeleteButtons}
 
                             </div>
 
@@ -129,11 +162,15 @@ class EventItemDetails extends Component {
                                 <hr />
 
 
-                                <h2> <i className="fas fa-ticket-alt"></i> Buy a ticket Now! </h2>
+                                <h2> <i className="fas fa-ticket-alt"></i> Buy a ticket Now! </h2> <br />
 
-                                <button type="button" className="btn btn-info btn-block mt-4">PayPal</button>
-                                <button type="button" className="btn btn-info btn-block mt-4">Debit or Credit Card</button>
-
+                                {this.state.ticketPrice ?
+                                    <Paypal price={this.state.ticketPrice} />
+                                    :
+                                    <div className="text-success">
+                                        <b>The event is free, there is no tickets available!</b>
+                                    </div>
+                                } <br />
 
 
                             </div>
@@ -150,11 +187,13 @@ class EventItemDetails extends Component {
 EventItemDetails.propTypes = {
     getEvent: PropTypes.func.isRequired,
     event: PropTypes.object.isRequired,
-    deleteEvent: PropTypes.func.isRequired
+    deleteEvent: PropTypes.func.isRequired,
+    security: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    event: state.event.event
+    event: state.event.event,
+    security: state.security
 })
 
 export default connect(mapStateToProps, { getEvent, deleteEvent })(EventItemDetails);

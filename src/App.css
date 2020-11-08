@@ -185,3 +185,7 @@ h1.updateEventName {
   color: red;
   float: right;
 }
+
+div.paypalbtn {
+  width: 300px;
+}

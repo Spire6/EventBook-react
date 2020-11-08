@@ -1,10 +1,18 @@
 import axios from "axios";
-import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS } from "./types";
+import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS, GET_ALL_CATEGORY } from "./types";
 
 
-export const createEvent = (event, history) => async dispatch => {
+export const createEvent = (event, history, image) => async dispatch => {
     try {
         await axios.post("/api/event", event);
+
+        //image upload
+        if (image !== null) {
+            await axios.post("/api/event/uploadimage", image)
+                .then(res => {
+                    console.log(res);
+                });
+        }
         history.push(`/eventDetails/${event.id}`);
         dispatch({
             type: GET_ERRORS,
@@ -153,5 +161,16 @@ export const getNumbersOfEvents = () => async dispatch => {
         type: GET_NUMBERS_OF_EVENTS,
         payload: res.data
     });
+};
+
+
+export const getAllCategories = () => async dispatch => {
+
+    const res = await axios.get("http://localhost:8080/api/category/all");
+    dispatch({
+        type: GET_ALL_CATEGORY,
+        payload: res.data
+    });
 }
+
 

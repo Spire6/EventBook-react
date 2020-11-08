@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { getEvent, createEvent } from "../../actions/eventActions";
-import { uploadImage } from "../../actions/uploadActions";
+import { getEvent, createEvent, getAllCategories } from "../../actions/eventActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import moment from "moment";
-
+import bsCustomFileInput from 'bs-custom-file-input';
 
 
 class UpdateEvent extends Component {
@@ -20,15 +19,19 @@ class UpdateEvent extends Component {
             location: "",
             description: "",
             imageName: "",
-            ticketPrice: "",
+            ticketPrice: '',
+            organizer: "",
             startDate: "",
             endDate: "",
             category: {
                 id: "",
                 categoryName: ""
             },
+
             errors: {},
-            selectedFile: null
+            selectedFile: null,
+            newImage: "",
+            firstLoad: true
         }
 
         this.onChangeVariable = this.onChange.bind(this);
@@ -49,6 +52,7 @@ class UpdateEvent extends Component {
             description,
             imageName,
             ticketPrice,
+            organizer,
             startDate,
             endDate,
             category
@@ -61,20 +65,19 @@ class UpdateEvent extends Component {
             description,
             imageName,
             ticketPrice,
+            organizer,
             startDate,
             endDate,
             category
         });
     }
 
-    /* static getDerivedStateFromProps(props, state, prevProps) {
-         return null;
-     } */
-
 
     componentDidMount() {
+        this.props.getAllCategories();
         const { id } = this.props.match.params;
         this.props.getEvent(id, this.props.history);
+        bsCustomFileInput.init();
     }
 
     onChange(e) {
@@ -84,6 +87,7 @@ class UpdateEvent extends Component {
     onSubmit(e) {
         e.preventDefault();
 
+
         const updatedEvent = {
             id: this.state.id,
             name: this.state.name,
@@ -91,6 +95,7 @@ class UpdateEvent extends Component {
             description: this.state.description,
             imageName: this.state.imageName,
             ticketPrice: this.state.ticketPrice,
+            organizer: this.state.organizer,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
             category: this.state.category
@@ -102,38 +107,61 @@ class UpdateEvent extends Component {
             fd.append('imageFile', this.state.selectedFile);
             fd.append('imageName', this.state.imageName);
 
-            this.props.uploadImage(fd);
+            this.props.createEvent(updatedEvent, this.props.history, fd)
+        } else {
+            this.props.createEvent(updatedEvent, this.props.history, null)
         }
 
-        this.props.createEvent(updatedEvent, this.props.history)
     }
 
 
     fileSelectedHandler = event => {
-        const timestamp = Date.now();
+        //const timestamp = Date.now();
         this.setState({
             selectedFile: event.target.files[0],
-            imageName: timestamp + ".jpg"
+            //imageName: timestamp + ".jpg",
+            newImage: URL.createObjectURL(event.target.files[0])
         });
     }
 
 
     render() {
 
-        const { errors } = this.state
+        const { event } = this.props;
+        const categories = this.props.categories;
+        const { errors } = this.state;
+        const { newImage } = this.state;
         const startDate = moment(this.state.startDate).format("yyyy-MM-DDThh:mm")
         const endDate = moment(this.state.endDate).format("yyyy-MM-DDThh:mm")
 
+        const actualImgPrev = (
+            <div>
+                <img className="fixedSizeImg float-right" src={`/api/event/public/image/${event.imageName}`} alt="" />
+            </div>
+        )
+        const newImgPrev = (
+            <div>
+                <img className="fixedSizeImg float-right" src={this.state.newImage} alt="" />
+            </div>
+        )
+
+        let imagePreview;
+
+        if (newImage) {
+            imagePreview = newImgPrev;
+        } else {
+            imagePreview = actualImgPrev;
+        }
+
 
         return (
-
             <div className="project">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
 
                             <div className="updateTitle">
-                                <img className="fixedSizeImg float-right" src={`/api/event/public/image/${this.state.imageName}`} alt="" />
+                                {imagePreview}
                                 <h5 className="display-4">Edit Event</h5>
                                 <h1 className=""> {this.state.name} </h1>
                             </div>
@@ -171,12 +199,11 @@ class UpdateEvent extends Component {
                                         name="category"
                                         value={this.state.category.id}
                                         onChange={this.onChangeVariable}>
-                                        <option value="1">Education</option>
-                                        <option value="2">Art</option>
-                                        <option value="3">Music</option>
-                                        <option value="4">Culture</option>
-                                        <option value="5">Party</option>
-                                        <option value="6">Other</option>
+                                        {
+                                            categories.map(cat => (
+                                                <option key={cat.id} value={cat.id}>{cat.categoryName}</option>
+                                            ))
+                                        }
                                     </select>
                                 </div>
 
@@ -225,8 +252,16 @@ class UpdateEvent extends Component {
                                 </div> <br />
 
                                 <h6>Change event image</h6>
-                                <div className="form-group files color">
-                                    <input className="imageInput" type="file" onChange={this.fileSelectedHandler} />
+                                <div className="form-group">
+                                    <div className="custom-file">
+                                        <input id="inputGroupFile01"
+                                            type="file"
+                                            className={classnames("custom-file-input", { "is-invalid": errors.image })}
+                                            accept="image/x-png,image/jpeg"
+                                            onChange={this.fileSelectedHandler} />
+                                        <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file (jpg/png)</label>
+                                        {errors.image && <div className="invalid-feedback">{errors.image}</div>}
+                                    </div>
                                 </div><br />
 
 
@@ -250,15 +285,18 @@ class UpdateEvent extends Component {
 
 UpdateEvent.propTypes = {
     getEvent: PropTypes.func.isRequired,
+    getAllCategories: PropTypes.func.isRequired,
     createEvent: PropTypes.func.isRequired,
-    uploadImage: PropTypes.func.isRequired,
     event: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    security: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
     event: state.event.event,
-    errors: state.errors
+    categories: state.event.categories,
+    errors: state.errors,
+    security: state.security
 })
 
-export default connect(mapStateToProps, { getEvent, createEvent, uploadImage })(UpdateEvent);
+export default connect(mapStateToProps, { getEvent, createEvent, getAllCategories })(UpdateEvent);
