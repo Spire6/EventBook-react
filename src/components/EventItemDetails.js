@@ -165,7 +165,8 @@ class EventItemDetails extends Component {
                                 <h2> <i className="fas fa-ticket-alt"></i> Buy a ticket Now! </h2> <br />
 
                                 {this.state.ticketPrice ?
-                                    <Paypal price={this.state.ticketPrice} />
+                                    <Paypal price={this.state.ticketPrice}
+                                        eventId={this.state.id} />
                                     :
                                     <div className="text-success">
                                         <b>The event is free, there is no tickets available!</b>

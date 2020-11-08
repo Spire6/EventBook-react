@@ -1,12 +1,31 @@
 import React from 'react';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
+import { connect } from 'react-redux';
+import { buyTicket } from "../../actions/eventActions";
+import PropTypes from "prop-types";
 
 class Paypal extends React.Component {
+
+    constructor() {
+        super()
+
+        this.state = {
+            success: false
+        }
+    }
+
     render() {
+
         const onSuccess = (payment) => {
+
+            this.setState({ success: true })
+
+            this.props.buyTicket(this.props.eventId);
             // Congratulation, it came here means everything's fine!
             console.log("The payment was succeeded!", payment);
             // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+
+
         }
 
         const onCancel = (data) => {
@@ -57,12 +76,18 @@ class Paypal extends React.Component {
                     }}
                 />
 
-                <p></p>
+                {this.state.success &&
+                    (
+                        <h5 className="text-success">Thank you! The payment was successful! </h5>
+                    )}
             </div>
 
         );
     }
 }
 
+Paypal.propTypes = {
+    buyTicket: PropTypes.func.isRequired
+}
 
-export default Paypal;
+export default connect(null, { buyTicket })(Paypal);

@@ -174,3 +174,19 @@ export const getAllCategories = () => async dispatch => {
 }
 
 
+export const buyTicket = (eventId) => async dispatch => {
+    try {
+        await axios.post(`/api/ticket/${eventId}`);
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+
+}
+
