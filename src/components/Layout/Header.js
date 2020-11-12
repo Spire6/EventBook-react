@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from "../../Images/logo.png";
+import logo from "../../Images/books.png";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -69,46 +69,51 @@ class Header extends Component {
 
         return (
             <React.Fragment>
-                <div>
-                    <nav className="navbar navbar-expand-sm bg-info navbar-dark">
-
-                        <Link to="/">
-                            <div className="navbar-brand">
-                                <img src={logo} height="30" className="d-inline-block align-top" alt=""></img>
+                <header>
+                    <div>
+                        <nav className="navbar navbar-expand-sm bg-info navbar-dark">
+                            <div className="container">
+                                <Link to="/">
+                                    <div className="navbar-brand">
+                                        <img src={logo} height="30" width="30" className="d-inline-block align-top" alt=""></img>
+                                    </div>
+                                    <div className="navbar-brand">
+                                        EventBook
                             </div>
-                        </Link>
+                                </Link>
 
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
+                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                                    <span className="navbar-toggler-icon"></span>
+                                </button>
 
-                        <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item">
-                                    <Link to="/" style={{ textDecoration: 'none' }}>
-                                        <div className="nav-link">Home <span className="sr-only">(current)</span></div>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/browseEvents" style={{ textDecoration: 'none' }}>
-                                        <div className="nav-link" href="/browseEvents">Browse events<span className="sr-only">(current)</span></div>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/createEvent" style={{ textDecoration: 'none' }}>
-                                        <div className="nav-link" href="/createEvent">Create event</div>
-                                    </Link>
-                                </li>
+                                <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                                    <ul className="navbar-nav mr-auto">
+                                        <li className="nav-item">
+                                            <Link to="/" style={{ textDecoration: 'none' }}>
+                                                <div className="nav-link">Home <span className="sr-only">(current)</span></div>
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/browseEvents" style={{ textDecoration: 'none' }}>
+                                                <div className="nav-link" href="/browseEvents">Browse events<span className="sr-only">(current)</span></div>
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/createEvent" style={{ textDecoration: 'none' }}>
+                                                <div className="nav-link" href="/createEvent">Create event</div>
+                                            </Link>
+                                        </li>
 
-                            </ul>
+                                    </ul>
 
-                            {headerLinks}
+                                    {headerLinks}
 
-                        </div>
+                                </div>
 
-
-                    </nav>
-                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </header>
             </React.Fragment>
         );
     }

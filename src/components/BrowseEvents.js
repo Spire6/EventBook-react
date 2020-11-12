@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories } from "../actions/eventActions";
 import PropTypes from "prop-types";
-import { StickyContainer, Sticky } from "react-sticky";
 
 class BrowseEvents extends Component {
 
@@ -90,55 +89,55 @@ class BrowseEvents extends Component {
 
         return (
             <div>
-                <StickyContainer>
 
-                    <div className="container">
 
-                        <div className="row">
-                            <div className="col-sm-3" >
-                                <Sticky>{({ style }) =>
-                                    <div style={style}>
+                <div className="container">
 
-                                        <form className="navbar-form navbar-left" role="search">
-                                            <h3> <i className="fas fa-search"></i> Find your event!</h3> <hr />
-                                            <h6>Name</h6>
-                                            <div className="form-group">
-                                                <input type="text" className="form-control" placeholder="Event name" onChange={e => this.searchByNameOnChange(e.target.value)} />
-                                            </div>
+                    <div className="row">
+                        <div className="col-sm-3" >
 
-                                            <h6>Category</h6>
-                                            <div className="form-group">
-                                                <select className="browser-default custom-select"
-                                                    name="category"
-                                                    onChange={e => this.categoryOnChange(e.target.value)}>
-                                                    <option value="">All category</option>
-                                                    {
-                                                        categories.map(cat => (
-                                                            <option key={cat.id} value={cat.categoryName}>{cat.categoryName}</option>
-                                                        ))
-                                                    }
-                                                </select>
-                                            </div>
+                            <div>
 
-                                        </form> <br />
-
-                                        <Link to="/createEvent" style={{ textDecoration: 'none' }}>
-                                            <button type="button" className="btn btn-success btn-lg btn-block">
-                                                <i className="far fa-calendar-plus"></i> Create Event
-                                        </button>
-                                        </Link> <br />
-                                        <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.allEventsOnClick.bind(this)}>All events <br />({countEvents.allEvents})<br /></button>
-                                        <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.monthlyEventsOnClick.bind(this)}>Events in this month<br />({countEvents.monthlyEvents})<br /></button>
-                                        <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.todayEventsOnClick.bind(this)}>Events today <br /> ({countEvents.dailyEvents}) <br /></button> <br /><br /><br />
+                                <form className="navbar-form navbar-left" role="search">
+                                    <h3> <i className="fas fa-search"></i> Find your event!</h3> <hr />
+                                    <h6>Name</h6>
+                                    <div className="form-group">
+                                        <input type="text" className="form-control" placeholder="Event name" onChange={e => this.searchByNameOnChange(e.target.value)} />
                                     </div>
-                                }</Sticky>
+
+                                    <h6>Category</h6>
+                                    <div className="form-group">
+                                        <select className="browser-default custom-select"
+                                            name="category"
+                                            onChange={e => this.categoryOnChange(e.target.value)}>
+                                            <option value="">All category</option>
+                                            {
+                                                categories.map(cat => (
+                                                    <option key={cat.id} value={cat.categoryName}>{cat.categoryName}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+
+                                </form> <br />
+
+                                <Link to="/createEvent" style={{ textDecoration: 'none' }}>
+                                    <button type="button" className="btn btn-success btn-lg btn-block">
+                                        <i className="far fa-calendar-plus"></i> Create Event
+                                        </button>
+                                </Link> <br />
+                                <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.allEventsOnClick.bind(this)}>All events <br />({countEvents.allEvents})<br /></button>
+                                <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.monthlyEventsOnClick.bind(this)}>Events in this month<br />({countEvents.monthlyEvents})<br /></button>
+                                <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.todayEventsOnClick.bind(this)}>Events today <br /> ({countEvents.dailyEvents}) <br /></button> <br /><br /><br />
                             </div>
 
-                            {BoardContent}
-
                         </div>
+
+                        {BoardContent}
+
                     </div>
-                </StickyContainer>
+                </div>
+
             </div>
         );
     }

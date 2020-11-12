@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import bsCustomFileInput from 'bs-custom-file-input';
 
 
@@ -131,8 +130,6 @@ class UpdateEvent extends Component {
         const categories = this.props.categories;
         const { errors } = this.state;
         const { newImage } = this.state;
-        const startDate = moment(this.state.startDate).format("yyyy-MM-DDThh:mm")
-        const endDate = moment(this.state.endDate).format("yyyy-MM-DDThh:mm")
 
         const actualImgPrev = (
             <div>
@@ -237,7 +234,7 @@ class UpdateEvent extends Component {
                                     <input type="datetime-local"
                                         className={classnames("form-control form-control-lg", { "is-invalid": errors.startDate })}
                                         name="startDate"
-                                        value={startDate}
+                                        value={this.state.startDate}
                                         onChange={this.onChangeVariable} />
                                     <div className="invalid-feedback"> {errors.startDate} </div>
                                 </div>
@@ -247,7 +244,7 @@ class UpdateEvent extends Component {
                                     <input type="datetime-local"
                                         className="form-control form-control-lg"
                                         name="endDate"
-                                        value={endDate}
+                                        value={this.state.endDate}
                                         onChange={this.onChangeVariable} />
                                 </div> <br />
 
@@ -265,7 +262,7 @@ class UpdateEvent extends Component {
                                 </div><br />
 
 
-                                <button type="submit" className="btn btn-info btn-block mt-4">Save event</button>
+                                <button type="submit" className="btn btn-info btn-block mt-4"> <i className="far fa-save"></i> Save event</button>
 
                                 <Link to={`/eventDetails/${this.state.id}`} style={{ textDecoration: 'none' }}>
                                     <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}

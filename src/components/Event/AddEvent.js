@@ -98,120 +98,121 @@ class AddEvent extends Component {
 
             <div className="project">
                 <div className="container">
-                    <div className="col-md-8 m-auto">
-                        <h5 className="display-4 text-center">Create New Event</h5>
-                        <hr /><br />
-                        <form onSubmit={this.onSubmitVariable}>
-                            <h6>Event name</h6>
-                            <div className="form-group">
-                                <input type="text"
-                                    className={classnames("form-control form-control-lg", { "is-invalid": errors.name || errors.eventName })}
-                                    placeholder="Event name"
-                                    name="name"
-                                    value={this.state.name}
-                                    onChange={this.onChangeVariable} />
+                    <div className="row">
+                        <div className="col-md-8 m-auto">
+                            <h5 className="display-4 text-center">Create New Event</h5>
+                            <hr /><br />
+                            <form onSubmit={this.onSubmitVariable}>
+                                <h6>Event name</h6>
+                                <div className="form-group">
+                                    <input type="text"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.name || errors.eventName })}
+                                        placeholder="Event name"
+                                        name="name"
+                                        value={this.state.name}
+                                        onChange={this.onChangeVariable} />
 
-                                {errors.name && (<div className="invalid-feedback"> {errors.name}</div>)}
-                                {errors.eventName && (<div className="invalid-feedback"> {errors.eventName}</div>)}
-                            </div>
-
-                            <h6>Location</h6>
-                            <div className="form-group">
-                                <input type="text"
-                                    className={classnames("form-control form-control-lg", { "is-invalid": errors.location })}
-                                    placeholder="Location"
-                                    name="location"
-                                    value={this.state.location}
-                                    onChange={this.onChangeVariable} />
-                                <div className="invalid-feedback"> {errors.location} </div>
-                            </div>
-
-                            <h6>Category</h6>
-                            <div className="form-group">
-                                <select className="browser-default custom-select"
-                                    name="category"
-                                    value={this.state.category.id}
-                                    onChange={this.onChangeVariable} >
-                                    {
-                                        categories.map(cat => (
-                                            <option key={cat.id} value={cat.id}>{cat.categoryName}</option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
-
-
-
-
-
-                            <h6>Description</h6>
-                            <div className="form-group">
-                                <textarea
-                                    className={classnames("form-control form-control-lg", { "is-invalid": errors.description })}
-                                    placeholder="Description of the event"
-                                    name="description"
-                                    value={this.state.description}
-                                    onChange={this.onChangeVariable}
-                                ></textarea>
-                                <div className="invalid-feedback"> {errors.description} </div>
-                            </div>
-
-                            <h6>Ticket price</h6>
-                            <div className="form-group">
-                                <input
-                                    type="number"
-                                    className="browser-default custom-select"
-                                    placeholder="Free"
-                                    min="0"
-                                    name="ticketPrice"
-                                    value={this.state.ticketPrice}
-                                    onChange={this.onChangeVariable}>
-                                </input>
-                            </div>
-
-                            <h6>Start Date</h6>
-                            <div className="form-group">
-                                <input type="datetime-local"
-                                    className={classnames("form-control form-control-lg", { "is-invalid": errors.startDate })}
-                                    name="startDate"
-                                    value={this.state.startDate}
-                                    onChange={this.onChangeVariable} />
-                                <div className="invalid-feedback"> {errors.startDate} </div>
-                            </div>
-
-                            <h6>End Date</h6>
-                            <div className="form-group">
-                                <input type="datetime-local"
-                                    className={classnames("form-control form-control-lg", { "is-invalid": errors.endDate })}
-                                    name="endDate"
-                                    value={this.state.endDate}
-                                    onChange={this.onChangeVariable} />
-                                <div className="invalid-feedback"> {errors.endDate} </div>
-                            </div> <br />
-
-                            <h6>Upload image</h6>
-                            <div className="form-group">
-                                <div className="custom-file">
-                                    <input id="inputGroupFile01"
-                                        type="file"
-                                        className={classnames("custom-file-input", { "is-invalid": errors.image })}
-                                        accept="image/x-png,image/jpeg"
-                                        onChange={this.fileSelectedHandler} />
-                                    <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file (jpg/png)</label>
-                                    {errors.image && <div className="invalid-feedback">{errors.image}</div>}
+                                    {errors.name && (<div className="invalid-feedback"> {errors.name}</div>)}
+                                    {errors.eventName && (<div className="invalid-feedback"> {errors.eventName}</div>)}
                                 </div>
-                            </div><br />
 
-                            <button type="submit" className="btn btn-info btn-block mt-4">Create</button>
+                                <h6>Location</h6>
+                                <div className="form-group">
+                                    <input type="text"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.location })}
+                                        placeholder="Location"
+                                        name="location"
+                                        value={this.state.location}
+                                        onChange={this.onChangeVariable} />
+                                    <div className="invalid-feedback"> {errors.location} </div>
+                                </div>
 
-                            <Link to={`/browseEvents`} style={{ textDecoration: 'none' }}>
-                                <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}
-                            </Link>
-                            <br /><br />
+                                <h6>Category</h6>
+                                <div className="form-group">
+                                    <select className="browser-default custom-select"
+                                        name="category"
+                                        value={this.state.category.id}
+                                        onChange={this.onChangeVariable} >
+                                        {
+                                            categories.map(cat => (
+                                                <option key={cat.id} value={cat.id}>{cat.categoryName}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
 
-                        </form>
+
+
+
+
+                                <h6>Description</h6>
+                                <div className="form-group">
+                                    <textarea
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.description })}
+                                        placeholder="Description of the event"
+                                        name="description"
+                                        value={this.state.description}
+                                        onChange={this.onChangeVariable}
+                                    ></textarea>
+                                    <div className="invalid-feedback"> {errors.description} </div>
+                                </div>
+
+                                <h6>Ticket price</h6>
+                                <div className="form-group">
+                                    <input
+                                        type="number"
+                                        className="browser-default custom-select"
+                                        placeholder="Free"
+                                        min="0"
+                                        name="ticketPrice"
+                                        value={this.state.ticketPrice}
+                                        onChange={this.onChangeVariable}>
+                                    </input>
+                                </div>
+
+                                <h6>Start Date</h6>
+                                <div className="form-group">
+                                    <input type="datetime-local"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.startDate })}
+                                        name="startDate"
+                                        value={this.state.startDate}
+                                        onChange={this.onChangeVariable} />
+                                    <div className="invalid-feedback"> {errors.startDate} </div>
+                                </div>
+
+                                <h6>End Date</h6>
+                                <div className="form-group">
+                                    <input type="datetime-local"
+                                        className={classnames("form-control form-control-lg", { "is-invalid": errors.endDate })}
+                                        name="endDate"
+                                        value={this.state.endDate}
+                                        onChange={this.onChangeVariable} />
+                                    <div className="invalid-feedback"> {errors.endDate} </div>
+                                </div> <br />
+
+                                <h6>Upload image</h6>
+                                <div className="form-group">
+                                    <div className="custom-file">
+                                        <input id="inputGroupFile01"
+                                            type="file"
+                                            className={classnames("custom-file-input", { "is-invalid": errors.image })}
+                                            accept="image/x-png,image/jpeg"
+                                            onChange={this.fileSelectedHandler} />
+                                        <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file (jpg/png)</label>
+                                        {errors.image && <div className="invalid-feedback">{errors.image}</div>}
+                                    </div>
+                                </div><br />
+
+                                <button type="submit" className="btn btn-info btn-block mt-4"><i className="fas fa-share-alt"></i> Create</button>
+
+                                <Link to={`/browseEvents`} style={{ textDecoration: 'none' }}>
+                                    <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}
+                                </Link>
+                                <br /><br />
+
+                            </form>
+                        </div>
                     </div>
-
                 </div>
             </div>
 

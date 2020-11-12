@@ -9,7 +9,7 @@ const BrowseEventsButton = () => {
 
                 <div className="bigbtn">
                     <div className="bigbtn-text">
-                        <img src={calendarLogo} height="150" className="d-inline-block align-top" alt=""></img> <br></br>
+                        <img src={calendarLogo} height="150" width="150" className="d-inline-block align-top" alt=""></img> <br></br>
                     Explore events!
                 </div>
                     <div className="dashDescr">

@@ -23,7 +23,10 @@ li {
 
 div.container {
   max-width: 1200px;
-  margin-top:40px
+}
+
+div.row {
+  margin-top: 40px;
 }
 
 div.item {
@@ -44,7 +47,7 @@ div.dashDescr {
  div.desc {
   text-align: left;
   width: 530px;
-  height: 180px;
+  height: 190px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -110,12 +113,10 @@ iframe.googleMap {
 
 
 
-
-
 div.itemDetails {
 	margin: 5px;
 	border: 1px solid #ccc;
-	width: 1200px;
+	width: 1150px;
 	height: auto;
 	padding-left: 30px;
 	padding-right: 30px;

@@ -9,7 +9,7 @@ const CreateEventButton = () => {
 
                 <div className="bigbtn">
                     <div className="bigbtn-text">
-                        <img src={shareLogo} height="150" className="d-inline-block align-top" alt=""></img> <br></br>
+                        <img src={shareLogo} height="150" width="150" className="d-inline-block align-top" alt=""></img> <br></br>
                         Share an event!
 				    </div>
                     <div className="dashDescr">Only registered users can create and share new events</div>
