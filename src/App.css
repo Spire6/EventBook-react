@@ -32,8 +32,7 @@ div.row {
 div.item {
 	margin: 5px;
 	border: 1px solid #ccc;
-	width: 850px;
-	height: 270px;
+	min-height: 270px;
 	padding: 10px;
 	text-align: left;
 	position: relative; 
@@ -46,7 +45,7 @@ div.dashDescr {
 
  div.desc {
   text-align: left;
-  width: 530px;
+  min-width: 330px;
   height: 190px;
   overflow: hidden;
   text-overflow: ellipsis;

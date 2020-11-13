@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Header from './components/Layout/Header';
-import "bootstrap/dist/css/bootstrap.min.css";
 import BrowseEvents from './components/BrowseEvents';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AddEvent from './components/Event/AddEvent';

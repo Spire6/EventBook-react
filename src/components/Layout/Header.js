@@ -18,7 +18,7 @@ class Header extends Component {
         const { validToken, user } = this.props.security;
 
         const userIsAuthenticated = (
-            <div className="collapse navbar-collapse" id="mobile-nav">
+            <div >
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                         <Link to="/login" className="nav-link active" style={{ textDecoration: 'none' }}>
@@ -37,7 +37,7 @@ class Header extends Component {
         );
 
         const userIsNotAuthenticated = (
-            <div className="collapse navbar-collapse" id="mobile-nav">
+            <div>
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                         <Link to="/login" style={{ textDecoration: 'none' }}>
