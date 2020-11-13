@@ -4,16 +4,16 @@ import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GE
 
 export const createEvent = (event, history, image) => async dispatch => {
     try {
-        await axios.post("/api/event", event);
+        const res = await axios.post("/api/event", event);
 
         //image upload
         if (image !== null) {
             await axios.post("/api/event/uploadimage", image)
-                .then(res => {
-                    console.log(res);
-                });
+            //.then(res => {
+            //     console.log(res);
+            //  });
         }
-        history.push(`/eventDetails/${event.id}`);
+        history.push(`/eventDetails/${res.data.id}`);
         dispatch({
             type: GET_ERRORS,
             payload: {}
@@ -166,7 +166,7 @@ export const getNumbersOfEvents = () => async dispatch => {
 
 export const getAllCategories = () => async dispatch => {
 
-    const res = await axios.get("http://localhost:8080/api/category/all");
+    const res = await axios.get("/api/category/all");
     dispatch({
         type: GET_ALL_CATEGORY,
         payload: res.data

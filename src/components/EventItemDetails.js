@@ -69,7 +69,7 @@ class EventItemDetails extends Component {
         const startTime = new Date(this.state.startDate).toLocaleTimeString("en-US", timeOptions);
         const endDate = new Date(this.state.endDate).toLocaleDateString("en-US", dateOptions);
         const endTime = new Date(this.state.endDate).toLocaleTimeString("en-US", timeOptions);
-        const imageUrl = `http://localhost:8080/api/event/public/image/${event.imageName}`;
+        const imageUrl = `/api/event/public/image/${event.imageName}`;
 
         const activeUserButtons = (
             <div>
@@ -144,7 +144,7 @@ class EventItemDetails extends Component {
                                     width="450"
                                     height="230"
                                     frameBorder="0"
-                                    src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${this.state.location}`} allowFullScreen>
+                                    src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${event.location}`} allowFullScreen>
                                 </iframe>
 
                                 <h3> <i className="fas fa-calendar-alt"></i> Details</h3>

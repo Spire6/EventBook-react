@@ -115,10 +115,10 @@ class UpdateEvent extends Component {
 
 
     fileSelectedHandler = event => {
-        //const timestamp = Date.now();
+        const timestamp = Date.now();
         this.setState({
             selectedFile: event.target.files[0],
-            //imageName: timestamp + ".jpg",
+            imageName: timestamp + ".jpg",
             newImage: URL.createObjectURL(event.target.files[0])
         });
     }
