@@ -118,14 +118,10 @@ class EventItemDetails extends Component {
 
                             </div>
 
+
+
                             <div className="eventImageDetails">
                                 <img className="fixedSizeImg" src={imageUrl} alt="eventImage" />
-                            </div>
-
-                            <div className="price">
-                                <h1>
-                                    <i className="fas fa-ticket-alt"></i> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"}
-                                </h1>
                             </div>
 
                             <div className="descDetails">
@@ -135,6 +131,13 @@ class EventItemDetails extends Component {
                                     {startTime}
                                 </i></b></h5>
                                 <h5> <b> <i> <i className="fas fa-bullhorn"></i> {this.state.category.categoryName} </i></b></h5>
+
+                                <div className="priceInDetails">
+                                    <h3>
+                                        <i className="fas fa-ticket-alt"></i> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"}
+                                    </h3>
+                                </div>
+
                             </div>
 
 
@@ -142,7 +145,7 @@ class EventItemDetails extends Component {
                                 <iframe className="googleMap"
                                     title="map"
                                     width="450"
-                                    height="230"
+                                    height="250"
                                     frameBorder="0"
                                     src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=${event.location}`} allowFullScreen>
                                 </iframe>
@@ -164,9 +167,12 @@ class EventItemDetails extends Component {
 
                                 <h2> <i className="fas fa-ticket-alt"></i> Buy a ticket Now! </h2> <br />
 
+
+
                                 {this.state.ticketPrice ?
                                     <Paypal price={this.state.ticketPrice}
-                                        eventId={this.state.id} />
+                                        eventId={this.state.id}
+                                        username={user.username} />
                                     :
                                     <div className="text-success">
                                         <b>The event is free, there is no tickets available!</b>

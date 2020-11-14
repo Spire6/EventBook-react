@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS, GET_ALL_CATEGORY } from "./types";
+import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS, GET_ALL_CATEGORY, GET_EVEMTS_BY_LOCATION } from "./types";
 
 
 export const createEvent = (event, history, image) => async dispatch => {
@@ -154,6 +154,27 @@ export const getEventsByName = (title) => async dispatch => {
         });
     }
 };
+
+
+export const getEventsByLocation = (location) => async dispatch => {
+    try {
+        const res = await axios.get(`/api/event/public/search/${location}`);
+        dispatch({
+            type: GET_EVEMTS_BY_LOCATION,
+            payload: res.data
+        });
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+};
+
 
 export const getNumbersOfEvents = () => async dispatch => {
     const res = await axios.get(`/api/event/public/count`);

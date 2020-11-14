@@ -115,7 +115,7 @@ iframe.googleMap {
 div.itemDetails {
 	margin: 5px;
 	border: 1px solid #ccc;
-	width: 1150px;
+	min-width: 500px;
 	height: auto;
 	padding-left: 30px;
 	padding-right: 30px;
@@ -128,24 +128,23 @@ div.itemDetails {
 
  div.descDetails {
   text-align: left;
-  width: 590px;
+  width: 550px;
   height: 180px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  padding-left: 30px;
+  text-overflow: ellipsis;  
 }
-  
 
 div.itemDetails img {
-	height: 200px;
+  height: 200px;
+  width: 315px;
 	float: left;
 	padding-bottom: 10px;
-	padding-right: 10px;
+	padding-right: 30px;
   }
   
 
 div.item.eventImageDetails {
-	float: left;
+  float: left;
 }
 
 div.price {
@@ -171,6 +170,10 @@ div.itemPrice {
   padding-right: 30px;
 }
 
+div.priceInDetails{
+  color: green;
+}
+
 img.fixedSizeImg{
   height: 200px;
   width: 295px;
@@ -178,7 +181,7 @@ img.fixedSizeImg{
 
 div.updateTitle {
   padding-bottom: 50px;
-  height: 190px;
+  min-height: 190px;
 }
 
 h1.updateEventName {
@@ -188,4 +191,8 @@ h1.updateEventName {
 
 div.paypalbtn {
   width: 300px;
+}
+
+iframe.googleMap {
+  padding-bottom: 20px;
 }

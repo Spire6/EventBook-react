@@ -19,8 +19,9 @@ class Paypal extends React.Component {
         const onSuccess = (payment) => {
 
             this.setState({ success: true })
-
-            this.props.buyTicket(this.props.eventId);
+            if (this.props.username) {
+                this.props.buyTicket(this.props.eventId);
+            }
             // Congratulation, it came here means everything's fine!
             //console.log("The payment was succeeded!", payment);
             // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data

@@ -118,9 +118,15 @@ class UpdateEvent extends Component {
         const timestamp = Date.now();
         this.setState({
             selectedFile: event.target.files[0],
-            imageName: timestamp + ".jpg",
+            //imageName: timestamp + ".jpg",
             newImage: URL.createObjectURL(event.target.files[0])
         });
+
+        if (this.state.imageName === "default.jpg") {
+            this.setState({
+                imageName: timestamp + ".jpg",
+            });
+        }
     }
 
 
@@ -248,7 +254,7 @@ class UpdateEvent extends Component {
                                         onChange={this.onChangeVariable} />
                                 </div> <br />
 
-                                <h6>Change event image</h6>
+                                <h6>Change event image </h6>
                                 <div className="form-group">
                                     <div className="custom-file">
                                         <input id="inputGroupFile01"
@@ -259,6 +265,7 @@ class UpdateEvent extends Component {
                                         <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file (jpg/png)</label>
                                         {errors.image && <div className="invalid-feedback">{errors.image}</div>}
                                     </div>
+                                    <i>(Max. size: 256KB)</i>
                                 </div><br />
 
 

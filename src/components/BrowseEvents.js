@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EventItem from './Event/EventItem';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories } from "../actions/eventActions";
+import { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories, getEventsByLocation } from "../actions/eventActions";
 import PropTypes from "prop-types";
 
 class BrowseEvents extends Component {
@@ -46,6 +46,13 @@ class BrowseEvents extends Component {
 
     searchByNameOnChange(title) {
         this.props.getEventsByName(title);
+    }
+
+    searchByLocationOnChange(location) {
+        this.props.getEventsByLocation(location);
+        if (location === "") {
+            this.props.getEvents();
+        }
     }
 
     render() {
@@ -105,6 +112,11 @@ class BrowseEvents extends Component {
                                         <input type="text" className="form-control" placeholder="Event name" onChange={e => this.searchByNameOnChange(e.target.value)} />
                                     </div>
 
+                                    <h6>Location</h6>
+                                    <div className="form-group">
+                                        <input type="text" className="form-control" placeholder="Location name" onChange={e => this.searchByLocationOnChange(e.target.value)} />
+                                    </div>
+
                                     <h6>Category</h6>
                                     <div className="form-group">
                                         <select className="browser-default custom-select"
@@ -151,6 +163,7 @@ BrowseEvents.propTypes = {
     getTodayEvents: PropTypes.func.isRequired,
     getEventsByCategory: PropTypes.func.isRequired,
     getEventsByName: PropTypes.func.isRequired,
+    getEventsByLocation: PropTypes.func.isRequired,
     getNumbersOfEvents: PropTypes.func.isRequired,
     getAllCategories: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
@@ -161,4 +174,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories })(BrowseEvents);
+export default connect(mapStateToProps, { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories, getEventsByLocation })(BrowseEvents);

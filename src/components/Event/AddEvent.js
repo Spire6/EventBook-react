@@ -201,6 +201,7 @@ class AddEvent extends Component {
                                         <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file (jpg/png)</label>
                                         {errors.image && <div className="invalid-feedback">{errors.image}</div>}
                                     </div>
+                                    <i>(Max. size: 256KB)</i>
                                 </div><br />
 
                                 <button type="submit" className="btn btn-info btn-block mt-4"><i className="fas fa-share-alt"></i> Create</button>

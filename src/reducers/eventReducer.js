@@ -1,4 +1,4 @@
-import { GET_EVENTS, GET_EVENT, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS, GET_ALL_CATEGORY } from "../actions/types";
+import { GET_EVENTS, GET_EVENT, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS, GET_ALL_CATEGORY, GET_EVEMTS_BY_LOCATION } from "../actions/types";
 
 const initialState = {
     events: [],
@@ -63,6 +63,11 @@ function eventReducer(state = initialState, action) {
             return {
                 ...state,
                 categories: action.payload
+            }
+        case GET_EVEMTS_BY_LOCATION:
+            return {
+                ...state,
+                events: action.payload
             }
 
         default:
