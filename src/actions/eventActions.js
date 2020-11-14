@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_MONTHLY_EVENTS, GET_TODAY_EVENTS, GET_EVENTS_BY_CATEGORY, GET_EVENTS_BY_NAME, GET_NUMBERS_OF_EVENTS, GET_ALL_CATEGORY, GET_EVEMTS_BY_LOCATION } from "./types";
+import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_NUMBERS_OF_EVENTS, GET_ALL_CATEGORY } from "./types";
 
 
 export const createEvent = (event, history, image) => async dispatch => {
@@ -77,7 +77,7 @@ export const getMonthlyEvents = () => async dispatch => {
     try {
         const res = await axios.get("/api/event/public/month");
         dispatch({
-            type: GET_MONTHLY_EVENTS,
+            type: GET_EVENTS,
             payload: res.data
         });
         dispatch({
@@ -98,7 +98,7 @@ export const getTodayEvents = () => async dispatch => {
     try {
         const res = await axios.get("/api/event/public/today");
         dispatch({
-            type: GET_TODAY_EVENTS,
+            type: GET_EVENTS,
             payload: res.data
         });
         dispatch({
@@ -120,7 +120,7 @@ export const getEventsByCategory = (category) => async dispatch => {
     try {
         const res = await axios.get(`/api/event/public/all/${category}`);
         dispatch({
-            type: GET_EVENTS_BY_CATEGORY,
+            type: GET_EVENTS,
             payload: res.data
         });
         dispatch({
@@ -140,7 +140,7 @@ export const getEventsByName = (title) => async dispatch => {
     try {
         const res = await axios.get(`/api/event/public/search?title=${title}`);
         dispatch({
-            type: GET_EVENTS_BY_NAME,
+            type: GET_EVENTS,
             payload: res.data
         });
         dispatch({
@@ -160,7 +160,7 @@ export const getEventsByLocation = (location) => async dispatch => {
     try {
         const res = await axios.get(`/api/event/public/search/${location}`);
         dispatch({
-            type: GET_EVEMTS_BY_LOCATION,
+            type: GET_EVENTS,
             payload: res.data
         });
         dispatch({
