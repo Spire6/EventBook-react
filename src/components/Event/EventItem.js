@@ -26,9 +26,9 @@ class EventItem extends Component {
 
                 <div className="item">
 
-                    <div className="eventImage">
-                        <img className="fixedSizeImg" src={`/api/event/public/image/${event.imageName}`} alt="sampleImage" />
-                    </div>
+
+                    <img className="fixedSizeImg" src={`/api/event/public/image/${event.imageName}`} alt="sampleImage" />
+
 
                     <div className="desc">
                         <div className="itemPrice">

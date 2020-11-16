@@ -45,7 +45,7 @@ div.dashDescr {
 
  div.desc {
   text-align: left;
-  min-width: 330px;
+  width: auto;
   height: 190px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -103,6 +103,7 @@ div.bigbtn-text {
 div.longDetails {
   padding-top: 30px;
   font-size: 17px;
+  width: auto;
 }
 
 iframe.googleMap {
@@ -110,12 +111,15 @@ iframe.googleMap {
 }
 
 
-
+p.eventTitle{
+  font-size: 3.5em;
+  font-weight: initial;
+}
 
 div.itemDetails {
 	margin: 5px;
 	border: 1px solid #ccc;
-	min-width: 500px;
+	width: auto;
 	height: auto;
 	padding-left: 30px;
 	padding-right: 30px;
@@ -128,7 +132,7 @@ div.itemDetails {
 
  div.descDetails {
   text-align: left;
-  width: 550px;
+  width: auto;
   height: 180px;
   overflow: hidden;
   text-overflow: ellipsis;  
@@ -172,6 +176,10 @@ div.itemPrice {
 
 div.priceInDetails{
   color: green;
+  float: right;
+  margin-top: 40px;
+  margin-right: 20px;
+  font-size: 3em;
 }
 
 img.fixedSizeImg{
@@ -189,10 +197,78 @@ h1.updateEventName {
   float: right;
 }
 
-div.paypalbtn {
-  width: 300px;
-}
-
 iframe.googleMap {
   padding-bottom: 20px;
+}
+
+div.userImage{
+  font-size: 100px;
+  text-align: center;
+  color: #17A2B8;
+}
+
+div.userDetails{
+  text-align: center;
+}
+
+div.myEventsTitle{
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 30px;
+}
+
+div.myEvents{
+  margin-top: 50px;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+/*Mobile view*/
+@media only screen and (max-width: 415px){
+  
+  /*Browse Items component */
+
+  img.fixedSizeImg{
+    width: 103%;
+  }
+
+  div.itemPrice {
+    float: right;
+    display: none;
+  }
+
+  div.desc {  
+    height: 190px;
+    width: 99%;
+  }
+
+  /*ItemsDetails component */
+
+
+  div.itemDetails img {
+    width: 113%;
+    }
+
+  p.eventTitle{
+    font-size: 2.7em;
+    font-weight: initial;
+  }
+
+  div.descDetails {
+    text-align: left;
+    width: 99%;
+    height: auto;
+  }
+
+  iframe.googleMap {
+    display: none;
+  }
+
+  div.priceInDetails{
+    display: none;
+  }
+
+
 }

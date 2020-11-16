@@ -8,6 +8,7 @@ import { deleteEvent } from "../actions/eventActions";
 import { GOOGLE_API_KEY } from "../maps/config";
 import Paypal from './PayPal/PayPal';
 
+
 class EventItemDetails extends Component {
 
     constructor() {
@@ -118,30 +119,29 @@ class EventItemDetails extends Component {
 
                             </div>
 
+                            <div className="priceInDetails">
 
+                                <i className="fas fa-ticket-alt"></i> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"}
 
-                            <div className="eventImageDetails">
-                                <img className="fixedSizeImg" src={imageUrl} alt="eventImage" />
                             </div>
 
+
+                            <img className="fixedSizeImg" src={imageUrl} alt="eventImage" />
+
+
                             <div className="descDetails">
-                                <h1> {this.state.name} </h1>
+                                <p className="eventTitle"> {this.state.name} </p>
                                 <h5> <b> <i> <i className="fas fa-clock"></i>
                                     {" " + startDate} {" - "}
                                     {startTime}
                                 </i></b></h5>
                                 <h5> <b> <i> <i className="fas fa-bullhorn"></i> {this.state.category.categoryName} </i></b></h5>
 
-                                <div className="priceInDetails">
-                                    <h3>
-                                        <i className="fas fa-ticket-alt"></i> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"}
-                                    </h3>
-                                </div>
-
                             </div>
 
 
                             <div className="longDetails">
+
                                 <iframe className="googleMap"
                                     title="map"
                                     width="450"
@@ -168,16 +168,17 @@ class EventItemDetails extends Component {
                                 <h2> <i className="fas fa-ticket-alt"></i> Buy a ticket Now! </h2> <br />
 
 
+                                <div className="paypalbtn">
 
-                                {this.state.ticketPrice ?
-                                    <Paypal price={this.state.ticketPrice}
-                                        eventId={this.state.id}
-                                        username={user.username} />
-                                    :
-                                    <div className="text-success">
-                                        <b>The event is free, there is no tickets available!</b>
-                                    </div>
-                                } <br />
+                                    {this.state.ticketPrice ?
+                                        <Paypal price={this.state.ticketPrice}
+                                            eventId={this.state.id}
+                                            username={user.username} />
+                                        :
+                                        <div className="text-success">
+                                            <b>The event is free, there is no tickets available!</b>
+                                        </div>
+                                    } </div> <br />
 
 
                             </div>

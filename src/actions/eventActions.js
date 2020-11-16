@@ -176,6 +176,26 @@ export const getEventsByLocation = (location) => async dispatch => {
 };
 
 
+export const getEventsByUser = () => async dispatch => {
+    try {
+        const res = await axios.get(`/api/event/allByUser`);
+        dispatch({
+            type: GET_EVENTS,
+            payload: res.data
+        });
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    } catch (err) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+}
+
+
 export const getNumbersOfEvents = () => async dispatch => {
     const res = await axios.get(`/api/event/public/count`);
     dispatch({
@@ -208,6 +228,5 @@ export const buyTicket = (eventId) => async dispatch => {
             payload: err.response.data
         });
     }
-
 }
 

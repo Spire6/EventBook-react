@@ -21,7 +21,7 @@ class Header extends Component {
             <div >
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <Link to="/login" className="nav-link active" style={{ textDecoration: 'none' }}>
+                        <Link to="/userDetails" className="nav-link active" style={{ textDecoration: 'none' }}>
                             <i className="fas fa-user"></i>
                             {" " + user.fullName}
                         </Link>

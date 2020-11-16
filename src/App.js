@@ -16,6 +16,7 @@ import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from './actions/types';
 import { logout } from './actions/securityActions';
 import SecuredRoute from "./securityUtils/SecureRoute";
+import UserDetails from './components/UserManagement/UserDetails';
 
 
 
@@ -64,6 +65,7 @@ function App() {
           <Switch>
             <SecuredRoute exact path="/createEvent" component={AddEvent} />
             <SecuredRoute exact path="/updateEvent/:id" component={UpdateEvent} />
+            <SecuredRoute exact path="/userDetails" component={UserDetails} />
           </Switch>
         </div>
       </Router>
