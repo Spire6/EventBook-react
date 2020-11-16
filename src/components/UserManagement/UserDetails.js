@@ -69,7 +69,9 @@ class UserDetails extends Component {
 
                     <div className="userDetails">
                         <h2>{user.fullName}</h2>
-                        <h5>{user.username}</h5>
+                        <h5>({user.roles.includes("Admin") ? "Admin" : "User"})</h5>
+                        <h6>{user.username}</h6>
+
                     </div>
 
                     <hr />

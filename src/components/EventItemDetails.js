@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import eventImage from "../Images/eventimage.jpg";
 import { getEvent } from "../actions/eventActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -100,7 +99,7 @@ class EventItemDetails extends Component {
 
         let editDeleteButtons;
 
-        if (user.username === this.state.organizerEmail) {
+        if (user.username === this.state.organizerEmail || user.roles.includes("Admin")) {
             editDeleteButtons = activeUserButtons;
         } else {
             editDeleteButtons = notActiveUserButtons;
