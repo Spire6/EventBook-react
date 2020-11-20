@@ -99,9 +99,14 @@ class EventItemDetails extends Component {
 
         let editDeleteButtons;
 
-        if (user.username === this.state.organizerEmail || user.roles.includes("Admin")) {
+
+
+        if (user.username === this.state.organizerEmail) {
             editDeleteButtons = activeUserButtons;
-        } else {
+        } else if (this.props.security.validToken !== false && user.roles.includes("Admin")) {
+            editDeleteButtons = activeUserButtons;
+        }
+        else {
             editDeleteButtons = notActiveUserButtons;
         }
 
