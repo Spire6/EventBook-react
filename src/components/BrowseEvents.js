@@ -76,7 +76,7 @@ class BrowseEvents extends Component {
             } else {
                 return (
                     <div className="col-sm-9">
-                        <div className="alert alert-info text-center" role="alert">
+                        <div className="alert alert-success text-center" role="alert">
                             Total: {events.length} results found.
                         </div>
                         {
@@ -103,7 +103,7 @@ class BrowseEvents extends Component {
                     <div className="row">
                         <div className="col-sm-3" >
 
-                            <div>
+                            <div className="sticky">
 
                                 <form className="navbar-form navbar-left" role="search">
                                     <h3> <i className="fas fa-search"></i> Find your event!</h3> <hr />
@@ -138,9 +138,9 @@ class BrowseEvents extends Component {
                                         <i className="far fa-calendar-plus"></i> Create Event
                                         </button>
                                 </Link> <br />
-                                <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.allEventsOnClick.bind(this)}>All events <br />({countEvents.allEvents})<br /></button>
-                                <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.monthlyEventsOnClick.bind(this)}>Events in this month<br />({countEvents.monthlyEvents})<br /></button>
-                                <button type="button" className="btn btn-info btn-lg btn-block" onClick={this.todayEventsOnClick.bind(this)}>Events today <br /> ({countEvents.dailyEvents}) <br /></button> <br /><br /><br />
+                                <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.allEventsOnClick.bind(this)}>All events <br />({countEvents.allEvents})<br /></button>
+                                <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.monthlyEventsOnClick.bind(this)}>Events in this month<br />({countEvents.monthlyEvents})<br /></button>
+                                <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.todayEventsOnClick.bind(this)}>Events today <br /> ({countEvents.dailyEvents}) <br /></button> <br /><br /><br />
                             </div>
 
                         </div>

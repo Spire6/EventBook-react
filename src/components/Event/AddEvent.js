@@ -204,7 +204,7 @@ class AddEvent extends Component {
                                     <i>(Max. size: 256KB)</i>
                                 </div><br />
 
-                                <button type="submit" className="btn btn-info btn-block mt-4"><i className="fas fa-share-alt"></i> Create</button>
+                                <button type="submit" className="btn btn-success btn-block mt-4"><i className="fas fa-share-alt"></i> Create</button>
 
                                 <Link to={`/browseEvents`} style={{ textDecoration: 'none' }}>
                                     <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}

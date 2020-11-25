@@ -3,6 +3,10 @@
   text-decoration: inherit;
 }
 
+.bg-custom {
+  background-image: linear-gradient(180deg, rgba(163,36,48,1) 0%, rgba(220,53,69,1) 100%);
+  }
+
 div.form-group textarea {
   height: 8em;
 }
@@ -77,7 +81,7 @@ div.detailsbtn {
   border: 1px solid #ccc;
   width: auto;
   height: 500px;
-  background-color: #17A2B8;
+  background: linear-gradient(0deg, rgba(163,36,48,1) 0%, rgba(220,53,69,1) 100%);
   color: white;
   border-radius: 5% / 5%;
   overflow: hidden;
@@ -90,7 +94,7 @@ div.detailsbtn {
 
 div.bigbtn:hover {
   border: 1px solid #777;
-  background-color: #147888;
+  background: linear-gradient(0deg, rgba(106,20,28,1) 0%, rgba(220,53,69,1) 100%);
   box-shadow: 20px 50px 100px rgba(0, 0, 0, 0.5);
 }
 
@@ -204,7 +208,7 @@ iframe.googleMap {
 div.userImage{
   font-size: 100px;
   text-align: center;
-  color: #17A2B8;
+  color: #a32430;
 }
 
 div.userDetails{
@@ -222,6 +226,12 @@ div.myEvents{
   text-align: center;
   width: 80%;
   margin: 0 auto;
+}
+
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 30px;
 }
 
 

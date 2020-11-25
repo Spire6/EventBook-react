@@ -47,7 +47,7 @@ class EventItem extends Component {
 
                     <Link to={`/eventDetails/${event.id}`} style={{ textDecoration: 'none' }}>
                         <div className="detailsbtn">
-                            <button type="button" className="btn btn-info btn-lg btn-block">
+                            <button type="button" className="btn btn-danger btn-lg btn-block">
                                 <i className="fas fa-angle-double-right"></i> {" "}
                              Event details
                             </button>

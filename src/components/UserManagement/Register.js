@@ -126,7 +126,7 @@ class Register extends Component {
                                     }
                                 </div> <br />
 
-                                <button className="btn btn-block btn-info my-2 my-sm-0" type="submit"> <i className="fas fa-user-plus"></i> Create user</button>
+                                <button className="btn btn-block btn-success my-2 my-sm-0" type="submit"> <i className="fas fa-user-plus"></i> Create user</button>
 
                                 <Link to={"/"} style={{ textDecoration: 'none' }}>
                                     <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}

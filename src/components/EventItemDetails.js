@@ -74,7 +74,7 @@ class EventItemDetails extends Component {
         const activeUserButtons = (
             <div>
                 <Link to={"/browseEvents"} style={{ textDecoration: 'none' }}>
-                    <button type="button" className="btn btn-info mt-4"><i className="fas fa-arrow-circle-left"></i> Back to to events </button> {" "}
+                    <button type="button" className="btn btn-secondary mt-4"><i className="fas fa-arrow-circle-left"></i> Back to to events </button> {" "}
                 </Link>
 
                 <Link to={`/updateEvent/${this.state.id}`} style={{ textDecoration: 'none' }}>
@@ -90,7 +90,7 @@ class EventItemDetails extends Component {
         const notActiveUserButtons = (
             <div>
                 <Link to={"/browseEvents"} style={{ textDecoration: 'none' }}>
-                    <button type="button" className="btn btn-info mt-4"><i className="fas fa-arrow-circle-left"></i> Back to to events </button> {" "}
+                    <button type="button" className="btn btn-secondary mt-4"><i className="fas fa-arrow-circle-left"></i> Back to to events </button> {" "}
                 </Link>
 
             </div>

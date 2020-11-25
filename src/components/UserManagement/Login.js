@@ -27,17 +27,17 @@ class Login extends Component {
     }
 
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.security.validToken) {
-            //redirecting with the token in the state
-            this.props.history.push("/browseEvents");
-        }
-
-        if (nextProps.errors) {
-            this.setState({ errors: nextProps.errors });
+    componentDidUpdate() {
+        if (this.props.security.validToken) {
+            this.props.history.push("/");
         }
     }
 
+    static getDerivedStateFromProps(nextProps, state) {
+        if (nextProps.errors) {
+            return { errors: nextProps.errors }
+        }
+    }
 
 
     onSubmit(e) {
@@ -105,7 +105,7 @@ class Login extends Component {
                                     }
                                 </div> <br />
 
-                                <button className="btn btn-block btn-info my-2 my-sm-0" type="submit"> <i className="fas fa-sign-in-alt"></i> Submit</button>
+                                <button className="btn btn-block btn-success my-2 my-sm-0" type="submit"> <i className="fas fa-sign-in-alt"></i> Submit</button>
 
                                 <Link to={"/"} style={{ textDecoration: 'none' }}>
                                     <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}

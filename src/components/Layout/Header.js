@@ -29,7 +29,7 @@ class Header extends Component {
 
                     <li>
                         <Link to="/logout" onClick={this.logout.bind(this)} style={{ textDecoration: 'none' }}>
-                            <button className="btn btn btn-danger my-2 my-sm-0" type="button"> <i className="fas fa-sign-out-alt"></i> Logout</button>
+                            <button className="btn btn btn-secondary my-2 my-sm-0" type="button"> <i className="fas fa-sign-out-alt"></i> Logout</button>
                         </Link>
                     </li>
                 </ul>
@@ -71,7 +71,7 @@ class Header extends Component {
             <React.Fragment>
                 <header>
                     <div>
-                        <nav className="navbar navbar-expand-sm bg-info navbar-dark">
+                        <nav className="navbar navbar-expand-sm bg-custom navbar-dark">
                             <div className="container">
                                 <Link to="/">
                                     <div className="navbar-brand">

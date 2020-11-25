@@ -41,7 +41,7 @@ class UserDetails extends Component {
             } else {
                 return (
                     <div className="">
-                        <div className="alert alert-info text-center" role="alert">
+                        <div className="alert alert-success text-center" role="alert">
                             Total: {events.length} results found.
                         </div>
                         {

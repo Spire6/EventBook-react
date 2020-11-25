@@ -20,6 +20,7 @@ class UpdateEvent extends Component {
             imageName: "",
             ticketPrice: '',
             organizer: "",
+            organizerEmail: "",
             startDate: "",
             endDate: "",
             category: {
@@ -52,6 +53,7 @@ class UpdateEvent extends Component {
             imageName,
             ticketPrice,
             organizer,
+            organizerEmail,
             startDate,
             endDate,
             category
@@ -65,6 +67,7 @@ class UpdateEvent extends Component {
             imageName,
             ticketPrice,
             organizer,
+            organizerEmail,
             startDate,
             endDate,
             category
@@ -95,6 +98,7 @@ class UpdateEvent extends Component {
             imageName: this.state.imageName,
             ticketPrice: this.state.ticketPrice,
             organizer: this.state.organizer,
+            organizerEmail: this.state.organizerEmail,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
             category: this.state.category
@@ -269,7 +273,7 @@ class UpdateEvent extends Component {
                                 </div><br />
 
 
-                                <button type="submit" className="btn btn-info btn-block mt-4"> <i className="far fa-save"></i> Save event</button>
+                                <button type="submit" className="btn btn-success btn-block mt-4"> <i className="far fa-save"></i> Save event</button>
 
                                 <Link to={`/eventDetails/${this.state.id}`} style={{ textDecoration: 'none' }}>
                                     <button type="button" className="btn btn-danger btn-block mt-4"><i className="fas fa-arrow-circle-left"></i> Cancel </button> {" "}
