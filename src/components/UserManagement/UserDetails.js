@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { getEventsByUser } from "../../actions/eventActions";
+import { getAllUsers } from "../../actions/adminActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import EventItem from '../Event/EventItem';
+import UserList from './UserList';
 
 class UserDetails extends Component {
 
@@ -23,13 +25,16 @@ class UserDetails extends Component {
 
     componentDidMount() {
         this.props.getEventsByUser();
+        this.props.getAllUsers();
     }
 
     render() {
         const { user } = this.props.security;
         const { events } = this.props.event;
+        const { userList } = this.props.admin;
         const { errors } = this.state;
-        let BoardContent;
+        let eventsBoard;
+        let usersBoard;
 
         const boardAlgorithm = (errors) => {
             if (errors.eventNotFound) {
@@ -56,8 +61,35 @@ class UserDetails extends Component {
         }
 
 
+        eventsBoard = boardAlgorithm(errors);
 
-        BoardContent = boardAlgorithm(errors);
+        if (user.roles.includes("Admin")) {
+            usersBoard = (
+                <div className="userDetailsTitle">
+                    <h2>User list</h2>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                userList.map(user => (
+                                    <UserList key={user.id} user={user} />
+                                ))
+                            }
+                        </tbody>
+                    </table>
+
+
+                </div>
+            );
+        }
+
 
         return (
             <div className="row">
@@ -73,17 +105,19 @@ class UserDetails extends Component {
                         <h6>{user.username}</h6>
 
                     </div>
-
                     <hr />
 
-                    <div className="myEventsTitle">
+
+                    {usersBoard}
+
+                    <div className="userDetailsTitle">
                         <h3>My events</h3>
                         <hr />
                     </div>
 
 
                     <div className="myEvents">
-                        {BoardContent}
+                        {eventsBoard}
                     </div>
 
                 </div>
@@ -96,13 +130,15 @@ class UserDetails extends Component {
 UserDetails.propTypes = {
     getEventsByUser: PropTypes.func.isRequired,
     security: PropTypes.object.isRequired,
+    getAllUsers: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
     event: state.event,
     security: state.security,
+    admin: state.admin,
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { getEventsByUser })(UserDetails);
+export default connect(mapStateToProps, { getEventsByUser, getAllUsers })(UserDetails);

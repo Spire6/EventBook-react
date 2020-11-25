@@ -19,10 +19,13 @@ class UpdateEvent extends Component {
             description: "",
             imageName: "",
             ticketPrice: '',
-            organizer: "",
-            organizerEmail: "",
             startDate: "",
             endDate: "",
+            user: {
+                id: "",
+                username: "",
+                fullName: ""
+            },
             category: {
                 id: "",
                 categoryName: ""
@@ -52,10 +55,9 @@ class UpdateEvent extends Component {
             description,
             imageName,
             ticketPrice,
-            organizer,
-            organizerEmail,
             startDate,
             endDate,
+            user,
             category
         } = nextProps.event;
 
@@ -66,13 +68,13 @@ class UpdateEvent extends Component {
             description,
             imageName,
             ticketPrice,
-            organizer,
-            organizerEmail,
             startDate,
             endDate,
+            user,
             category
         });
     }
+
 
 
     componentDidMount() {
@@ -97,10 +99,9 @@ class UpdateEvent extends Component {
             description: this.state.description,
             imageName: this.state.imageName,
             ticketPrice: this.state.ticketPrice,
-            organizer: this.state.organizer,
-            organizerEmail: this.state.organizerEmail,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
+            user: this.state.user,
             category: this.state.category
         }
 

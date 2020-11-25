@@ -22,8 +22,11 @@ class EventItemDetails extends Component {
             ticketPrice: "",
             startDate: "",
             endDate: "",
-            organizer: "",
-            organizerEmail: "",
+            user: {
+                id: "",
+                username: "",
+                fullName: ""
+            },
             category: {
                 id: "",
                 categoryName: ""
@@ -101,7 +104,7 @@ class EventItemDetails extends Component {
 
 
 
-        if (user.username === this.state.organizerEmail) {
+        if (user.username === this.state.user.username) {
             editDeleteButtons = activeUserButtons;
         } else if (this.props.security.validToken !== false && user.roles.includes("Admin")) {
             editDeleteButtons = activeUserButtons;
@@ -160,7 +163,7 @@ class EventItemDetails extends Component {
                                 <b> End Date: </b> {endDate + " - " + endTime} <br />
                                 <b>Location:</b> {this.state.location} <br />
                                 <b>Category:</b> {this.state.category.categoryName} <br />
-                                <b>Organizer:</b> {this.state.organizer} <br />
+                                <b>Organizer:</b> {this.state.user.fullName} <br />
                                 <b>Ticket:</b> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"} <br /> <br />
 
                                 <hr />
