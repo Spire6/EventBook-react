@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createEvent, getAllCategories } from "../../actions/eventActions";
+import { createEvent, getAllCategories, clearErrors } from "../../actions/eventActions";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import bsCustomFileInput from 'bs-custom-file-input';
@@ -40,6 +40,7 @@ class AddEvent extends Component {
     }
 
     componentDidMount() {
+        //this.props.clearErrors();
         this.props.getAllCategories();
         bsCustomFileInput.init();
     }
@@ -225,6 +226,7 @@ class AddEvent extends Component {
 AddEvent.propTypes = {
     createEvent: PropTypes.func.isRequired,
     getAllCategories: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 }
 
@@ -234,4 +236,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { createEvent, getAllCategories })(AddEvent);
+export default connect(mapStateToProps, { createEvent, getAllCategories, clearErrors })(AddEvent);

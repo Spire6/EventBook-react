@@ -4,15 +4,15 @@ import { GET_ERRORS, GET_EVENT, GET_EVENTS, DELETE_EVENT, GET_NUMBERS_OF_EVENTS,
 
 export const createEvent = (event, history, image) => async dispatch => {
     try {
-        const res = await axios.post("/api/event", event);
 
         //image upload
         if (image !== null) {
             await axios.post("/api/event/uploadimage", image)
-            //.then(res => {
-            //     console.log(res);
-            //  });
+
         }
+
+        const res = await axios.post("/api/event", event);
+
         history.push(`/eventDetails/${res.data.id}`);
         dispatch({
             type: GET_ERRORS,
@@ -228,5 +228,12 @@ export const buyTicket = (eventId) => async dispatch => {
             payload: err.response.data
         });
     }
+}
+
+export const clearErrors = () => async dispatch => {
+    dispatch({
+        type: GET_ERRORS,
+        payload: {}
+    });
 }
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { login } from "../../actions/securityActions"
+import { login, clearErrors } from "../../actions/securityActions"
 
 class Login extends Component {
 
@@ -20,6 +20,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        this.props.clearErrors();
         //redirect - Don't show login for logged in users                                
         if (this.props.security.validToken) {
             this.props.history.push("/");
@@ -123,6 +124,7 @@ class Login extends Component {
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
     security: PropTypes.object.isRequired
 };
@@ -133,4 +135,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, clearErrors })(Login);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { createNewUser } from "../../actions/securityActions";
+import { createNewUser, clearErrors } from "../../actions/securityActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
@@ -22,10 +22,13 @@ class Register extends Component {
     }
 
     componentDidMount() {
+        this.props.clearErrors();
+
         //redirect - Don't show registration for logged in users                                
         if (this.props.security.validToken) {
             this.props.history.push("/");
         }
+
     }
 
     static getDerivedStateFromProps(nextProps, state) {
@@ -143,6 +146,7 @@ class Register extends Component {
 
 Register.propTypes = {
     createNewUser: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
     security: PropTypes.object.isRequired
 
@@ -153,4 +157,4 @@ const mapStateToProps = state => ({
     security: state.security
 });
 
-export default connect(mapStateToProps, { createNewUser })(Register);
+export default connect(mapStateToProps, { createNewUser, clearErrors })(Register);
