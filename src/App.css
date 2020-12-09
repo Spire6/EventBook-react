@@ -70,11 +70,6 @@ div.item img {
 	padding-right: 10px;
   }
   
-div.detailsbtn {
-	padding-bottom: 10px;
-}
-  
-  
   
   div.bigbtn {
   margin: 5px;
@@ -112,6 +107,7 @@ div.longDetails {
 
 iframe.googleMap {
   float: right;
+  width: 40%;
 }
 
 
@@ -254,6 +250,18 @@ div.sticky {
     width: 99%;
   }
 
+  div.detailsbtn {
+    padding-bottom: 0px;
+    padding-top: 10px;
+  }
+
+  div > div.detailsOverflow{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+
+
   /*ItemsDetails component */
 
 
@@ -273,11 +281,18 @@ div.sticky {
   }
 
   iframe.googleMap {
-    display: none;
+    width: 100%;
   }
 
   div.priceInDetails{
     display: none;
+  }
+
+
+  /* Dashboard*/
+
+  div.bigbtn {
+    padding-top: 0px;
   }
 
 

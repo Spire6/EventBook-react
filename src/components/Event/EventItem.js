@@ -37,11 +37,13 @@ class EventItem extends Component {
                             </h3>
                         </div>
                         <h3>{event.name}</h3>
-                        <b> <i className="far fa-calendar-alt"> </i> Date: </b> {new Date(event.startDate).toLocaleDateString("en-US", dateOptions)} <br />
-                        <b> <i className="far fa-clock"></i> Time:</b> {new Date(event.startDate).toLocaleTimeString("en-US", timeOptions)} <br />
-                        <b> <i className="fas fa-thumbtack"></i> Location:</b> {event.location} <br />
-                        <b> <i className="fas fa-bullhorn"></i> Category:</b> {event.category.categoryName} <br />
-                        <b> <i className="fas fa-info-circle"></i> Description:</b>  {event.description} <br />
+                        <div className="detailsOverflow">
+                            <b> <i className="far fa-calendar-alt"> </i> Date: </b> {new Date(event.startDate).toLocaleDateString("en-US", dateOptions)} <br />
+                            <b> <i className="far fa-clock"></i> Time:</b> {new Date(event.startDate).toLocaleTimeString("en-US", timeOptions)} <br />
+                            <b> <i className="fas fa-thumbtack"></i> Location:</b> {event.location} <br />
+                            <b> <i className="fas fa-bullhorn"></i> Category:</b> {event.category.categoryName} <br />
+                            <b> <i className="fas fa-info-circle"></i> Description:</b>  {event.description} <br />
+                        </div>
                     </div>
 
 
