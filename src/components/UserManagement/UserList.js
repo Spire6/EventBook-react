@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import { deleteUser } from "../../actions/adminActions"
+import classnames from "classnames";
 
 class UserList extends Component {
 
@@ -12,6 +13,7 @@ class UserList extends Component {
     render() {
 
         const { user } = this.props;
+        const loggedInUser = this.props.security.user.username;
 
         return (
             <Fragment>
@@ -20,7 +22,10 @@ class UserList extends Component {
                     <td>{user.fullName}</td>
                     <td>{user.username}</td>
                     <td>
-                        <button type="button" className="btn btn-danger" onClick={this.onDeleteClick.bind(this, user.id)}>
+                        <button
+                            type="button"
+                            className={classnames("btn btn-danger", { "disabled": loggedInUser == user.username })}
+                            onClick={this.onDeleteClick.bind(this, user.id)}>
                             <i className="fas fa-trash-alt"></i>
                         </button>
                     </td>
@@ -31,7 +36,12 @@ class UserList extends Component {
 }
 
 UserList.propTypes = {
-    deleteUser: PropTypes.func.isRequired
+    deleteUser: PropTypes.func.isRequired,
+    security: PropTypes.object.isRequired
 }
 
-export default connect(null, { deleteUser })(UserList);
+const mapStateToProps = state => ({
+    security: state.security,
+});
+
+export default connect(mapStateToProps, { deleteUser })(UserList);

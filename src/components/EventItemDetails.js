@@ -54,6 +54,7 @@ class EventItemDetails extends Component {
 
         const { user } = this.props.security;
         const { event } = this.props;
+        let editDeleteButtons;
 
         const dateOptions = {
             weekday: "long",
@@ -98,10 +99,6 @@ class EventItemDetails extends Component {
 
             </div>
         );
-
-
-        let editDeleteButtons;
-
 
 
         if (user.username === this.state.user.username) {
@@ -185,7 +182,8 @@ class EventItemDetails extends Component {
                                         <div className="text-success">
                                             <b>The event is free, there is no tickets available!</b>
                                         </div>
-                                    } </div> <br />
+                                    }
+                                </div> <br />
 
 
                             </div>

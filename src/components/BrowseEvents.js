@@ -24,7 +24,7 @@ class BrowseEvents extends Component {
 
     componentDidMount() {
         this.props.getAllCategories()
-        this.props.getMonthlyEvents();
+        this.props.getEvents();
         this.props.getNumbersOfEvents();
     }
 
