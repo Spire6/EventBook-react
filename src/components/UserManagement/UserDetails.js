@@ -25,7 +25,10 @@ class UserDetails extends Component {
 
     componentDidMount() {
         this.props.getEventsByUser();
-        this.props.getAllUsers();
+        if (this.props.security.user.roles.includes("Admin")) {
+            this.props.getAllUsers();
+        }
+
     }
 
     render() {
