@@ -24,7 +24,7 @@ class UserList extends Component {
                     <td>
                         <button
                             type="button"
-                            className={classnames("btn btn-danger", { "disabled": loggedInUser == user.username })}
+                            className={classnames("btn btn-danger", { "disabled": loggedInUser === user.username })}
                             onClick={this.onDeleteClick.bind(this, user.id)}>
                             <i className="fas fa-trash-alt"></i>
                         </button>
