@@ -7,11 +7,11 @@ export const createEvent = (event, history, image) => async dispatch => {
 
         //image upload
         if (image !== null) {
-            await axios.post("/api/event/uploadimage", image)
+            await axios.put("/api/event/uploadimage", image)
 
         }
 
-        const res = await axios.post("/api/event", event);
+        const res = await axios.put("/api/event", event);
 
         history.push(`/eventDetails/${res.data.id}`);
         dispatch({

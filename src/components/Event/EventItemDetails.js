@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { getEvent } from "../actions/eventActions";
+import { getEvent } from "../../actions/eventActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteEvent } from "../actions/eventActions";
-import { GOOGLE_API_KEY } from "../maps/config";
-import Paypal from './PayPal/PayPal';
+import { deleteEvent } from "../../actions/eventActions";
+import { GOOGLE_API_KEY } from "../../maps/config";
+import Paypal from '../PayPal/PayPal';
 
 
 class EventItemDetails extends Component {

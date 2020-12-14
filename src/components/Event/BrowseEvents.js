@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import EventItem from './Event/EventItem';
+import EventItem from './EventItem';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories, getEventsByLocation } from "../actions/eventActions";
+import { getEvents, getMonthlyEvents, getTodayEvents, getEventsByCategory, getEventsByName, getNumbersOfEvents, getAllCategories, getEventsByLocation } from "../../actions/eventActions";
 import PropTypes from "prop-types";
 
 class BrowseEvents extends Component {
