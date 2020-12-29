@@ -38,6 +38,10 @@ export const getEvents = () => async dispatch => {
         type: GET_ERRORS,
         payload: {}
     });
+    dispatch({
+        type: GET_EVENT,
+        payload: {}
+    });
 };
 
 
@@ -214,21 +218,6 @@ export const getAllCategories = () => async dispatch => {
     });
 }
 
-
-export const buyTicket = (eventId) => async dispatch => {
-    try {
-        await axios.post(`/api/ticket/${eventId}`);
-        dispatch({
-            type: GET_ERRORS,
-            payload: {}
-        });
-    } catch (err) {
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        });
-    }
-}
 
 export const clearErrors = () => async dispatch => {
     dispatch({

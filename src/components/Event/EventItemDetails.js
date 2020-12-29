@@ -5,13 +5,14 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteEvent } from "../../actions/eventActions";
 import { GOOGLE_API_KEY } from "../../maps/config";
-import Paypal from '../PayPal/PayPal';
+import PayPal from '../PayPal/PayPal';
 
 
 class EventItemDetails extends Component {
 
     constructor() {
         super()
+
 
         this.state = {
             id: "",
@@ -43,6 +44,7 @@ class EventItemDetails extends Component {
     componentDidMount() {
         const { id } = this.props.match.params;
         this.props.getEvent(id, this.props.history);
+
     }
 
     onDeleteClick = id => {
@@ -124,9 +126,7 @@ class EventItemDetails extends Component {
                             </div>
 
                             <div className="priceInDetails">
-
                                 <i className="fas fa-ticket-alt"></i> {this.state.ticketPrice ? this.state.ticketPrice + "$" : "FREE"}
-
                             </div>
 
 
@@ -171,20 +171,21 @@ class EventItemDetails extends Component {
 
                                 <h2> <i className="fas fa-ticket-alt"></i> Buy a ticket Now! </h2> <br />
 
+                                {
+                                    this.state.ticketPrice ?
 
-                                <div className="paypalbtn">
-
-                                    {this.state.ticketPrice ?
-                                        <Paypal price={this.state.ticketPrice}
-                                            eventId={this.state.id}
-                                            username={user.username} />
+                                        <div className="paypalbtn">
+                                            <PayPal
+                                                price={this.state.ticketPrice}
+                                                eventId={this.state.id}
+                                                username={user.username}
+                                            />
+                                        </div>
                                         :
                                         <div className="text-success">
                                             <b>The event is free, there is no tickets available!</b>
                                         </div>
-                                    }
-                                </div> <br />
-
+                                }
 
                             </div>
                         </div>

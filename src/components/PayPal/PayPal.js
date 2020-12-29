@@ -1,94 +1,80 @@
+import axios from 'axios';
 import React from 'react';
-import PaypalExpressBtn from 'react-paypal-express-checkout';
-import { connect } from 'react-redux';
-import { buyTicket } from "../../actions/eventActions";
-import PropTypes from "prop-types";
 
-class Paypal extends React.Component {
 
-    constructor() {
-        super()
+function PayPal(props) {
+    const [paid, setPaid] = React.useState(false);
+    const [error, setError] = React.useState(null);
+    const paypalRef = React.useRef();
+    const [user] = React.useState(props.username);
+    const [eventId] = React.useState(props.eventId);
 
-        this.state = {
-            success: false
+    // To show PayPal buttons once the component loads
+    React.useEffect(() => {
+        if (user) {
+            window.paypal
+                .Buttons({
+                    createOrder: (data, actions) => {
+                        return axios.post(`http://localhost:8080/api/paypal/payment/${eventId}`)
+                            .then(res => {
+                                return res;
+                            }).then(res => {
+                                console.log("Token received from backend: " + res.data.token);
+                                return res.data.token;
+                            });
+                    },
+
+                    onApprove: async (data, actions) => {
+                        try {
+                            const order = await actions.order.capture();
+                            //Save order to the Database
+                            return axios.post(`http://localhost:8080/api/ticket/${eventId}`)
+                                .then(
+                                    setPaid(true),
+                                    console.log(order),
+                                    console.log("Successful payment!")
+                                );
+                        } catch (error) {
+                            setError(error);
+                        }
+                    },
+
+                    onError: (err) => {
+                        console.error(err);
+                    },
+                })
+                .render(paypalRef.current);
         }
+    }, [eventId, user]);
+
+    // Successfull payment
+    if (paid) {
+        return <div>
+            <h5 className="text-success">Thank you! The payment was successful! </h5>
+        </div>;
     }
 
-    render() {
-
-        const onSuccess = (payment) => {
-
-            this.setState({ success: true })
-            if (this.props.username) {
-                this.props.buyTicket(this.props.eventId);
-            }
-            // Congratulation, it came here means everything's fine!
-            //console.log("The payment was succeeded!", payment);
-            // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
-
-
-        }
-
-        const onCancel = (data) => {
-            // User pressed "cancel" or close Paypal's popup!
-            //console.log('The payment was cancelled!', data);
-            // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
-        }
-
-        const onError = (err) => {
-            // The main Paypal's script cannot be loaded or somethings block the loading of that script!
-            //console.log("Error!", err);
-            // Because the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js"
-            // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
-        }
-
-        let env = 'sandbox'; // you can set here to 'production' for production
-        let currency = 'USD'; // or you can set this value from your props or state
-        let total = this.props.price; // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
-        // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
-
-        const client = {
-            sandbox: 'AfXJ-ciMgASQUYeWflbZoer8j2xCiMP00vvL1ncdwTl656oftJCrVkuCk36SO0US5vNkuZC-snkoTClF',
-            production: 'YOUR-PRODUCTION-APP-ID',
-        }
-        // In order to get production's app-ID, you will have to send your app to Paypal for approval first
-        // For sandbox app-ID (after logging into your developer account, please locate the "REST API apps" section, click "Create App"):
-        //   => https://developer.paypal.com/docs/classic/lifecycle/sb_credentials/
-        // For production app-ID:
-        //   => https://developer.paypal.com/docs/classic/lifecycle/goingLive/
-
-        // NB. You can also have many Paypal express checkout buttons on page, just pass in the correct amount and they will work!
-        return (
-            <div>
-
-                <PaypalExpressBtn
-                    env={env}
-                    client={client}
-                    currency={currency}
-                    total={total}
-                    onError={onError}
-                    onSuccess={onSuccess}
-                    onCancel={onCancel}
-                    style={{
-                        size: 'medium',
-                        color: 'blue',
-                        shape: 'rect',
-                        label: 'checkout'
-                    }}
-                />
-
-                {this.state.success &&
-                    (
-                        <h5 className="text-success">Thank you! The payment was successful! </h5>
-                    )}
-            </div>
-
-        );
+    // If any error occurs
+    if (error) {
+        return <div>
+            <h5 className="text-danger">Error Occurred in processing payment! Please try again! </h5>
+        </div>;
     }
+
+    // If user not logged in
+    if (!user) {
+        return <div>
+            <h5 className="text-danger">Please log in before buy a ticket!</h5>
+        </div>;
+    }
+
+    // Default Render - buttons
+    return (
+        <div>
+            <div ref={paypalRef} />
+        </div>
+    );
 }
 
-Paypal.propTypes = {
-    buyTicket: PropTypes.func.isRequired
-}
 
-export default connect(null, { buyTicket })(Paypal);
+export default PayPal;

@@ -230,6 +230,10 @@ div.sticky {
   top: 30px;
 }
 
+div.paypalbtn{
+  width: 45%;
+}
+
 
 /*Mobile view*/
 @media only screen and (max-width: 415px){
@@ -264,7 +268,6 @@ div.sticky {
 
   /*ItemsDetails component */
 
-
   div.itemDetails img {
     width: 113%;
     }
@@ -288,6 +291,9 @@ div.sticky {
     display: none;
   }
 
+  div.paypalbtn{
+    width: 100%;
+  }
 
   /* Dashboard*/
 
