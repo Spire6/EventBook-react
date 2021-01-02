@@ -15,7 +15,7 @@ function PayPal(props) {
             window.paypal
                 .Buttons({
                     createOrder: (data, actions) => {
-                        return axios.post(`http://localhost:8080/api/paypal/payment/${eventId}`)
+                        return axios.post(`/api/paypal/payment/${eventId}`)
                             .then(res => {
                                 return res;
                             }).then(res => {
@@ -28,7 +28,7 @@ function PayPal(props) {
                         try {
                             const order = await actions.order.capture();
                             //Save order to the Database
-                            return axios.post(`http://localhost:8080/api/ticket/${eventId}`)
+                            return axios.post(`/api/ticket/${eventId}`)
                                 .then(
                                     setPaid(true),
                                     console.log(order),
