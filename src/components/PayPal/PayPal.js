@@ -14,29 +14,24 @@ function PayPal(props) {
         if (user) {
             window.paypal
                 .Buttons({
-                    createOrder: (data, actions) => {
-                        return axios.post(`/api/paypal/payment/${eventId}`)
+                    createOrder: () => {
+                        return axios.post(`http://localhost:8080/api/paypal/payment/${eventId}`)
                             .then(res => {
-                                return res;
-                            }).then(res => {
                                 console.log("Token received from backend: " + res.data.token);
                                 return res.data.token;
                             });
                     },
 
                     onApprove: async (data, actions) => {
-                        try {
-                            const order = await actions.order.capture();
-                            //Save order to the Database
-                            return axios.post(`/api/ticket/${eventId}`)
-                                .then(
-                                    setPaid(true),
-                                    console.log(order),
-                                    console.log("Successful payment!")
-                                );
-                        } catch (error) {
-                            setError(error);
-                        }
+                        return axios.post(`http://localhost:8080/api/paypal/complete?paymentId=${data.paymentID}&payerId=${data.payerID}`)
+                            .then(res => {
+                                if (res.data.payment === "approved") {
+                                    setPaid(true);
+                                    console.log("Successful payment!");
+                                } else {
+                                    setError(error);
+                                }
+                            });
                     },
 
                     onError: (err) => {
@@ -45,7 +40,7 @@ function PayPal(props) {
                 })
                 .render(paypalRef.current);
         }
-    }, [eventId, user]);
+    }, [eventId, user, error]);
 
     // Successfull payment
     if (paid) {
